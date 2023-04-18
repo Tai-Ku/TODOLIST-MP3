@@ -1,14 +1,19 @@
-import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import { useSelector, useDispatch } from "react-redux";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { Routes, Route } from "react-router-dom";
+
+import { Home, Public, Login } from "./pages/public";
+import path from "./untils/path";
+
 function App() {
-  const { test } = useSelector((state) => state.app);
-  console.log(test);
   return (
     <>
       <div className="flex flex-col gap-8 justify-center border h-screen items-center">
-        App
+        <Routes>
+          <Route path={path.PUBLIC} element={<Public />}>
+            <Route path={path.HOME} element={<Home />} />
+            <Route path={path.Login} element={<Login />} />
+          </Route>
+        </Routes>
       </div>
       <ToastContainer
         position="top-center"
