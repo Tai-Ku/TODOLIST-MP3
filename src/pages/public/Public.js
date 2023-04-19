@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { SidebarLeft, SidebarRight } from "../../components";
 function Public() {
   return (
-    <div className="w-full h-screen flex overflow-y-auto ">
+    <div className="w-full h-screen flex bg-[#1a0b23] ">
       <div className="w-[240px] flex-none ">
         <SidebarLeft />
       </div>

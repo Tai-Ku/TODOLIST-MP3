@@ -2,21 +2,21 @@ export const sidebarMenu = [
   {
     path: "mymusic",
     text: "Cá nhân",
-    icons: <i class="fa-solid fa-music"></i>,
+    icons: <i className="fa-solid fa-music"></i>,
   },
   {
     path: "",
     text: "Khám Phá",
-    icons: <i class="fa-solid fa-music"></i>,
+    icons: <i className="fa-solid fa-compact-disc"></i>,
   },
   {
     path: "zing-chart",
     text: "#zingchart",
-    icons: <i class="fa-solid fa-music"></i>,
+    icons: <i className="fa-solid fa-chart-pie"></i>,
   },
   {
     path: "follow",
     text: "Theo dõi",
-    icons: <i class="fa-solid fa-music"></i>,
+    icons: <i className="fa-regular fa-newspaper"></i>,
   },
 ];
