@@ -7,11 +7,12 @@ import path from "./untils/path";
 function App() {
   return (
     <>
-      <div className="flex flex-col gap-8 justify-center border h-screen items-center">
+      <div>
         <Routes>
           <Route path={path.PUBLIC} element={<Public />}>
             <Route path={path.HOME} element={<Home />} />
             <Route path={path.Login} element={<Login />} />
+            <Route path={path.STAR} element={<Home />} />
           </Route>
         </Routes>
       </div>

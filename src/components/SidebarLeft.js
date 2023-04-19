@@ -1,0 +1,31 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+
+import logo from "../assets/logo.svg";
+import { sidebarMenu } from "../untils/menu";
+
+const notActive =
+  "flex items-center justify-start text-[#dadada] hover:opacity-100 hover:font-bold text-[13px] gap-2 py-2 px-[25px] opacity-90 font-medium ";
+const active =
+  "flex items-center justify-start text-[#fafafa] bg-[#3c2f44] text-[13px] gap-2 py-2 px-[25px] opacity-100 font-bold";
+const SidebarLeft = () => {
+  return (
+    <div className="flex  flex-col bg-[#26172e] h-full">
+      <div className="w-full py-[15px] h-[70px] px-[25px] flex justify-start  items-center  ">
+        <img src={logo} alt="logo" className="h-10 w-[120px] object-contain" />
+      </div>
+      {sidebarMenu.map((item, index) => (
+        <NavLink
+          to={item.path}
+          key={item.path}
+          className={({ isActive }) => (isActive ? active : notActive)}
+        >
+          {item.icons}
+          <span>{item.text}</span>
+        </NavLink>
+      ))}
+    </div>
+  );
+};
+
+export default SidebarLeft;
