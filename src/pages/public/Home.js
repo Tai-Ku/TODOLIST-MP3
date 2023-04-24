@@ -1,6 +1,4 @@
 import { Header, Slider } from "../../components";
-import { useEffect } from "react";
-import { getHome } from "../../store/actions/home";
 
 function Home() {
   return (
