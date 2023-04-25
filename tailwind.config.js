@@ -61,7 +61,7 @@ module.exports = {
       },
     },
     screens: {
-      1600: "1600px",
+      1280: "1280px",
     },
   },
   plugins: [],

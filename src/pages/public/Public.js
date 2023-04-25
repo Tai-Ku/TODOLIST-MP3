@@ -11,7 +11,7 @@ function Public() {
         <div className="flex-auto">
           <Outlet />
         </div>
-        <div className="w-[329px] flex-none">
+        <div className="w-[329px] hidden 1280:flex flex-none animate-slide-left border">
           <SidebarRight />
         </div>
       </div>
