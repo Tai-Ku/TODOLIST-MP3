@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        "main-100": "#E7ECEC",
+        "main-100": "#26172e",
         "main-200": "#DDE4E4",
         "main-300": "#CED9D9",
         "main-400": "#C0D8D8",
