@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import List from "./List";
+import moment from "moment";
 const Lists = ({ songs, totalDuration }) => {
   console.log(songs);
   return (
@@ -14,9 +15,17 @@ const Lists = ({ songs, totalDuration }) => {
       </div>
       <div className="flex flex-col">
         {songs?.map((item) => (
-          <List key={item.encodeID} songData={item} />
+          <List
+            key={item.encodeID}
+            totalDuration={totalDuration}
+            songData={item}
+          />
         ))}
       </div>
+      <span className="flex text-xs text-[#ffffff80] gap-3">
+        <span>{`${songs?.length} bài hát`}</span>
+        <span>{moment.utc(totalDuration * 100).format("HH:mm:ss")}</span>
+      </span>
     </div>
   );
 };

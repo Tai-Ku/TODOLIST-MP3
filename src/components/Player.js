@@ -1,38 +1,55 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import * as api from "../api";
-
+import * as action from "../store/actions";
 const Player = () => {
-  const audioEl = new Audio(
-  );
+  const audioEl = useRef(new Audio());
+  const dispatch = useDispatch();
   const { curSongId, isPlaying } = useSelector((state) => state.music);
   const [songInfo, setSongInfo] = useState(null);
+  const [sources, setSources] = useState(null);
   // const [isPlaying, setIsPlaying] = useState(false);
-  console.log(isPlaying);
-  console.log(audioEl);
-  audioEl.play();
+  console.log(audioEl.current, isPlaying);
 
-  const handleClick = () => {
-    // setIsPlaying(!isPlaying);
-    // const player = document.querySelector(".player>i");
-    // if (!isPlaying) {
-    //   player.classList.remove("fa-play");
-    //   player.classList.add("fa-pause");
-    // } else {
-    //   player.classList.add("fa-play");
-    //   player.classList.remove("fa-pause");
-    // }
-  };
   useEffect(() => {
     const fetchDetailSong = async () => {
-      const response = await api.apiGetSong("ZOACFBBU");
-      if (response) {
-        setSongInfo(response.data.data);
+      const [res1, res2] = await Promise.all([
+        api.getDetailSong(curSongId),
+        api.apiGetSong(curSongId),
+      ]);
+      if (res1.data.err === 0) {
+        setSongInfo(res1.data.data);
       }
+      if (res2.data.err === 0) {
+        setSources(res2.data.data["128"]);
+      }
+      console.log(res1, res2);
     };
     fetchDetailSong();
   }, [curSongId]);
+
+  useEffect(() => {
+    audioEl.current.pause();
+    audioEl.current.src = sources;
+    audioEl.current.load();
+    if (isPlaying) audioEl.current.play();
+  }, [curSongId, sources]);
+
+  const handleClick = () => {
+    if (isPlaying) {
+      // console.log(audioEl)current.;
+      audioEl.current.load();
+      audioEl.current.pause();
+      dispatch(action.play(false));
+    } else {
+      audioEl.current.load();
+      audioEl.current.play();
+      dispatch(action.play(true));
+    }
+  };
+  console.log(audioEl);
+
   return (
     <div className="flex w-full px-5 justify-center items-center h-full">
       <div className="w-[30%] flex-auto h-full border flex items-center gap-2">
@@ -71,7 +88,11 @@ const Player = () => {
             onClick={handleClick}
             className="player border p-2 w-[51px] text-center border-[b3afb5] hover:border-[#883698] rounded-full cursor-pointer"
           >
-            <i className="fa-solid fa-play text-[30px]  hover:text-[#883698] text-[#b3afb5] px-1 "></i>
+            {isPlaying ? (
+              <i className="fa-solid fa-pause text-[30px]  hover:text-[#883698] text-[#b3afb5] px-1 "></i>
+            ) : (
+              <i className="fa-solid fa-play text-[30px]  hover:text-[#883698] text-[#b3afb5] px-1 "></i>
+            )}
           </span>
           <span className=" cursor-pointer">
             <i className="fa-solid fa-forward-step text-[18px] text-[#b3afb5]"></i>

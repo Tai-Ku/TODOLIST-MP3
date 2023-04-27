@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import * as apis from "../../api";
 import moment, { months } from "moment";
 import { Lists } from "../../components";
+import { Scrollbars } from "react-custom-scrollbars-2";
+import { counter } from "@fortawesome/fontawesome-svg-core";
 const Album = () => {
   const { title, pid } = useParams();
   const [playList, setPlayList] = useState({});
@@ -17,7 +19,7 @@ const Album = () => {
   }, [pid]);
 
   return (
-    <div className="flex gap-8 w-full px-[59px] bg-[#1e0623] ">
+    <div className="flex gap-8 w-full h-full px-[59px] bg-[#1a0b23 ] ">
       <div className="w-1/4 flex-none  flex flex-col items-center gap-2 ">
         <img
           src={playList?.thumbnailM}
@@ -42,20 +44,20 @@ const Album = () => {
           </span>
         </div>
       </div>
-      <div className="flex-auto border flex flex-col overflow-y-scroll">
-        <span>
-          <span className="text-[#ffffff80] text-[12px] ">Lời tựa </span>
-          <span className="text-[#fff] text-[14px]">
-            {playList?.sortDescription}
+      <Scrollbars style={{ width: "100%", height: "70%" }}>
+        <div className="flex-auto border flex flex-col mb-[40px]">
+          <span>
+            <span className="text-[#ffffff80] text-[12px] ">Lời tựa </span>
+            <span className="text-[#fff] text-[14px]">
+              {playList?.sortDescription}
+            </span>
           </span>
-        </span>
-        <Lists
-          // songs={playList.song.items}
-          songs={playList?.song?.items}
-          // totalDuration={playList?.song.totalDuration}
-          totalDuration={playList?.song?.totalDuration}
-        />
-      </div>
+          <Lists
+            songs={playList?.song?.items}
+            // totalDuration={playList?.song.totalDuration}
+          />
+        </div>
+      </Scrollbars>
     </div>
   );
 };
