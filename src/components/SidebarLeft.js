@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import path from "../untils/path";
 import logo from "../assets/logo.svg";
 import { sidebarMenu } from "../untils/menu";
 
@@ -9,9 +10,13 @@ const notActive =
 const active =
   "flex items-center justify-start text-[#fafafa] bg-[#3c2f44] text-[13px] gap-2 py-2 px-[25px] opacity-100 font-bold";
 const SidebarLeft = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex  flex-col bg-[#26172e] h-full">
-      <div className="w-full py-[15px] h-[70px] px-[25px] flex justify-start  items-center  ">
+      <div
+        onClick={() => navigate(path.HOME)}
+        className="w-full py-[15px] h-[70px] px-[25px] flex justify-start  items-center  "
+      >
         <img src={logo} alt="logo" className="h-10 w-[120px] object-contain" />
       </div>
       {sidebarMenu.map((item, index) => (
