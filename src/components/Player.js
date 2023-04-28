@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 import * as api from "../api";
 import * as action from "../store/actions";
+import moment from "moment";
+
+var intervalId;
 const Player = () => {
-  const audioEl = useRef(new Audio());
   const dispatch = useDispatch();
+  const [second, setSecond] = useState(0);
   const { curSongId, isPlaying } = useSelector((state) => state.music);
   const [songInfo, setSongInfo] = useState(null);
-  const [sources, setSources] = useState(null);
-  // const [isPlaying, setIsPlaying] = useState(false);
-  console.log(audioEl.current, isPlaying);
-
+  const [audio, setAudio] = useState(new Audio());
+  const thumbRef = useRef();
   useEffect(() => {
     const fetchDetailSong = async () => {
       const [res1, res2] = await Promise.all([
@@ -22,34 +23,38 @@ const Player = () => {
         setSongInfo(res1.data.data);
       }
       if (res2.data.err === 0) {
-        setSources(res2.data.data["128"]);
+        audio.pause();
+        setAudio(new Audio(res2.data.data["128"]));
       }
-      console.log(res1, res2);
     };
     fetchDetailSong();
   }, [curSongId]);
 
   useEffect(() => {
-    audioEl.current.pause();
-    audioEl.current.src = sources;
-    audioEl.current.load();
-    if (isPlaying) audioEl.current.play();
-  }, [curSongId, sources]);
-
+    audio.load();
+    if (isPlaying) audio.play();
+  }, [audio]);
+  useEffect(() => {
+    if (isPlaying) {
+      intervalId = setInterval(() => {
+        let percent =
+          Math.round((audio.currentTime * 10000) / songInfo?.duration) / 100;
+        thumbRef.current.style.cssText = `right: ${100 - percent}%`;
+        setSecond(Math.round(audio.currentTime));
+      }, 300);
+    } else {
+      intervalId && clearInterval(intervalId);
+    }
+  }, [isPlaying]);
   const handleClick = () => {
     if (isPlaying) {
-      // console.log(audioEl)current.;
-      audioEl.current.load();
-      audioEl.current.pause();
+      audio.pause();
       dispatch(action.play(false));
     } else {
-      audioEl.current.load();
-      audioEl.current.play();
+      audio.play();
       dispatch(action.play(true));
     }
   };
-  console.log(audioEl);
-
   return (
     <div className="flex w-full px-5 justify-center items-center h-full">
       <div className="w-[30%] flex-auto h-full border flex items-center gap-2">
@@ -76,7 +81,7 @@ const Player = () => {
           </span>
         </div>
       </div>
-      <div className="w-[40%] flex flex-col  items-center h-full border p-2">
+      <div className="w-[40%] flex flex-col  gap-1 items-center h-full border p-1">
         <div className="flex gap-5 justify-center items-center">
           <span title="Bật phát ngẫu nhiên" className=" cursor-pointer">
             <i className="fa-solid fa-shuffle text-[18px] text-[#b3afb5]"></i>
@@ -101,7 +106,20 @@ const Player = () => {
             <i className="fa-solid fa-repeat text-[18px] text-[#b3afb5]"></i>
           </span>
         </div>
-        <div>audio</div>
+        <div className="w-full flex items-center">
+          <span className="ml-[3%]">
+            {moment.utc(second * 1000).format("mm:ss")}
+          </span>
+          <div className="w-3/4 m-auto relative rounded-l-full rounded-r-full bg-[#595360] h-[3px]">
+            <div
+              ref={thumbRef}
+              className="absolute top-0 left-0 rounded-l-full rounded-r-full h-[3px]  bg-[#ffff]"
+            ></div>
+          </div>
+          <span className="mr-[3%]">
+            {moment.utc(songInfo?.duration * 1000).format("mm:ss")}
+          </span>
+        </div>
       </div>
       <div className="w-[30%] flex-auto h-full border ">mute</div>
     </div>
