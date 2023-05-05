@@ -12,12 +12,13 @@ const Player = () => {
   const { curSongId, isPlaying, atAlbum, songs } = useSelector(
     (state) => state.music
   );
-
   const [songInfo, setSongInfo] = useState(null);
   const [audio, setAudio] = useState(new Audio());
   const [isShuffle, setIsShuffle] = useState(false);
+  const [isRepeat, setIsRepeat] = useState(false);
   const thumbRef = useRef();
   const trackRef = useRef();
+  console.log(isRepeat);
   useEffect(() => {
     const fetchDetailSong = async () => {
       const [res1, res2] = await Promise.all([
@@ -41,21 +42,38 @@ const Player = () => {
     };
     fetchDetailSong();
   }, [curSongId]);
-  // console.log(songs);
+
   const play = async () => {
     await audio.play();
   };
   // bug code phan isPlaying
   useEffect(() => {
     audio.load();
+    dispatch(action.play(!isPlaying));
+
     if (isPlaying) play();
+  }, [audio]);
+  useEffect(() => {
+    const handleEnded = () => {
+      if (isShuffle) {
+        handleIsShuffle();
+      } else if (isRepeat) {
+        handleNext();
+      } else {
+        audio.pause();
+        dispatch(action.play(false));
+      }
+    };
+    audio.addEventListener("ended", handleEnded);
+    return () => {
+      audio.removeEventListener("ended", handleEnded);
+    };
   }, [audio]);
 
   useEffect(() => {
     if (isPlaying) {
       audio.play();
       intervalId = setInterval(() => {
-        console.log(audio.currentTime);
         let percent =
           Math.round((audio.currentTime * 10000) / songInfo?.duration) / 100;
         thumbRef.current.style.cssText = `right: ${100 - percent}%`;
@@ -63,7 +81,6 @@ const Player = () => {
       }, 300);
     } else {
       intervalId && clearInterval(intervalId);
-      console.log("change");
     }
   }, [isPlaying]);
 
@@ -107,7 +124,12 @@ const Player = () => {
       dispatch(action.play(false));
     }
   };
-  const handleShuffle = () => {};
+  const handleIsShuffle = () => {
+    setIsShuffle((prev) => !prev);
+    const randomIndex = Math.round(Math.random() * songs?.length) - 1;
+    dispatch(action.setCurSongId(songs[randomIndex]?.encodeId));
+    dispatch(action.play(isPlaying));
+  };
   return (
     <div className="flex w-full px-5 justify-center items-center h-full">
       <div className="w-[30%] flex-auto h-full border flex items-center gap-2">
@@ -169,7 +191,12 @@ const Player = () => {
             <i className="fa-solid fa-forward-step text-[18px]"></i>
           </span>
           <span title="Bật phát tất cả" className=" cursor-pointer">
-            <i className="fa-solid fa-repeat text-[18px] text-[#ffff]"></i>
+            <i
+              className={`fa-solid fa-repeat text-[18px] ${
+                isRepeat && "text-purple-600"
+              }  text-[#fff]`}
+              onClick={() => setIsRepeat((prev) => !prev)}
+            ></i>
           </span>
         </div>
         <div className="w-full flex items-center">

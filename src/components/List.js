@@ -1,17 +1,20 @@
 import moment from "moment";
 import { memo } from "react";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as action from "../store/actions";
 
 const List = ({ songData, totalDuration }) => {
   const dispatch = useDispatch();
+  const { isPlaying } = useSelector((state) => state.music);
   return (
     <div
       className="flex items-center justify-between p-[10px] border-t border-[#26172e] hover:bg-[#2e2639] cursor-pointer"
       onClick={() => {
         dispatch(action.setCurSongId(songData.encodeId));
-        dispatch(action.play(true));
+        dispatch(action.play(!isPlaying));
+        // dispatch(action.play(true));
+
         dispatch(action.playAlbum(true));
       }}
     >

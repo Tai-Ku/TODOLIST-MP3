@@ -18,7 +18,7 @@ const Lists = ({ totalDuration }) => {
       <div className="flex flex-col">
         {songs?.map((item) => (
           <List
-            key={item.encodeID}
+            key={item.encodeId}
             totalDuration={totalDuration}
             songData={item}
           />

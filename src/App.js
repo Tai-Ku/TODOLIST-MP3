@@ -1,7 +1,7 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Home, Public, Login, Personal, Album } from "./pages/public";
 import path from "./untils/path";
@@ -10,9 +10,16 @@ import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
+  const { isPlaying, curSongId } = useSelector((state) => state.music);
   useEffect(() => {
     dispatch(action.getHome());
     dispatch(action.play(false));
+
+    if (curSongId) {
+      dispatch(action.play(!isPlaying));
+    } else {
+      return;
+    }
   }, []);
   return (
     <>
