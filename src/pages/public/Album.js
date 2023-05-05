@@ -5,7 +5,11 @@ import moment, { months } from "moment";
 import { Lists } from "../../components";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { counter } from "@fortawesome/fontawesome-svg-core";
+
+import * as action from "../../store/actions";
+import { useDispatch } from "react-redux";
 const Album = () => {
+  const dispatch = useDispatch();
   const { title, pid } = useParams();
   const [playList, setPlayList] = useState({});
   useEffect(() => {
@@ -13,6 +17,7 @@ const Album = () => {
       const response = await apis.apiGetDetailPlaylist(pid);
       if (response.data.err === 0) {
         setPlayList(response.data?.data);
+        dispatch(action.setPlaylist(response?.data?.data?.song?.items));
       }
     };
     fetchDetailPlaylist();
@@ -45,7 +50,7 @@ const Album = () => {
         </div>
       </div>
       <Scrollbars style={{ width: "100%", height: "70%" }}>
-        <div className="flex-auto border flex flex-col mb-[40px]">
+        <div className="flex-auto  flex flex-col mb-[40px]">
           <span>
             <span className="text-[#ffffff80] text-[12px] ">Lời tựa </span>
             <span className="text-[#fff] text-[14px]">
@@ -53,8 +58,7 @@ const Album = () => {
             </span>
           </span>
           <Lists
-            songs={playList?.song?.items}
-            // totalDuration={playList?.song.totalDuration}
+          // totalDuration={playList?.song.totalDuration}
           />
         </div>
       </Scrollbars>

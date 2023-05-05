@@ -1,8 +1,10 @@
 import React, { memo } from "react";
 import List from "./List";
 import moment from "moment";
-const Lists = ({ songs, totalDuration }) => {
-  console.log(songs);
+import { useSelector } from "react-redux";
+
+const Lists = ({ totalDuration }) => {
+  const { songs } = useSelector((state) => state.music);
   return (
     <div className="flex flex-col w-full text-xs ">
       <div className="flex justify-between p-[10px] text-[#ffffff80]">

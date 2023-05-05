@@ -1,4 +1,5 @@
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -11,6 +12,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(action.getHome());
+    dispatch(action.play(false));
   }, []);
   return (
     <>
@@ -27,7 +29,7 @@ function App() {
         </Routes>
       </div>
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
