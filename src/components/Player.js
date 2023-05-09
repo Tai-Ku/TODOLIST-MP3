@@ -1,30 +1,35 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import LoadingSongs from "./LoadingSongs";
 import * as api from "../api";
 import * as action from "../store/actions";
 import moment from "moment";
 import { toast } from "react-toastify";
 var intervalId;
-const Player = () => {
+const Player = ({ setIsShowSideBar }) => {
   const dispatch = useDispatch();
   const [second, setSecond] = useState(0);
   const { curSongId, isPlaying, atAlbum, songs } = useSelector(
     (state) => state.music
   );
+  const [isLoaded, setIsLoaded] = useState(true);
   const [songInfo, setSongInfo] = useState(null);
   const [audio, setAudio] = useState(new Audio());
-  const [isShuffle, setIsShuffle] = useState(false);
+  const [isShuffle, setIsShuffle] = useState(true);
   const [isRepeat, setIsRepeat] = useState(false);
+  const [volume, setVolume] = useState(100);
+  const [isOffVolume, setIsOffVolume] = useState(true);
   const thumbRef = useRef();
   const trackRef = useRef();
-  console.log(isRepeat);
   useEffect(() => {
     const fetchDetailSong = async () => {
+      setIsLoaded(false);
       const [res1, res2] = await Promise.all([
         api.getDetailSong(curSongId),
         api.apiGetSong(curSongId),
       ]);
+      setIsLoaded(true);
+
       if (res1.data.err === 0) {
         setSongInfo(res1.data.data);
       }
@@ -69,7 +74,6 @@ const Player = () => {
       audio.removeEventListener("ended", handleEnded);
     };
   }, [audio]);
-
   useEffect(() => {
     if (isPlaying) {
       audio.play();
@@ -99,7 +103,6 @@ const Player = () => {
     thumbRef.current.style.cssText = `right: ${100 - percent}%`;
     audio.currentTime = (percent * songInfo?.duration) / 100;
   };
-
   const handleNext = () => {
     if (songs) {
       let currentSongIndex;
@@ -130,6 +133,9 @@ const Player = () => {
     dispatch(action.setCurSongId(songs[randomIndex]?.encodeId));
     dispatch(action.play(isPlaying));
   };
+  useEffect(() => {
+    audio.volume = volume / 100;
+  }, [volume]);
   return (
     <div className="flex w-full px-5 justify-center items-center h-full">
       <div className="w-[30%] flex-auto h-full border flex items-center gap-2">
@@ -176,7 +182,11 @@ const Player = () => {
             onClick={handleClick}
             className="player border p-2 w-[51px] text-center border-[b3afb5] hover:border-[#883698] rounded-full cursor-pointer"
           >
-            {isPlaying ? (
+            {!isLoaded ? (
+              <div className="px-1 py-1 w-full h-full">
+                <LoadingSongs />
+              </div>
+            ) : isPlaying ? (
               <i className="fa-solid fa-pause text-[30px]  hover:text-[#883698] text-[#b3afb5] px-1 "></i>
             ) : (
               <i className="fa-solid fa-play text-[30px]  hover:text-[#883698] text-[#b3afb5] px-1 "></i>
@@ -218,9 +228,30 @@ const Player = () => {
           </span>
         </div>
       </div>
-      <div className="w-[30%] flex-auto h-full border ">mute</div>
+      <div className="w-[30%] flex-auto h-full border flex items-center justify-end gap-4">
+        <span onClick={() => setVolume((prev) => (+prev === 0 ? 70 : 0))}>
+          {volume > 0 ? (
+            <i class="fa-solid fa-volume-high"></i>
+          ) : (
+            <i class="fa-solid fa-volume-xmark"></i>
+          )}
+        </span>
+        <input
+          type="range"
+          step={1}
+          min={0}
+          max={100}
+          onChange={(e) => setVolume(e.target.value)}
+          value={volume}
+        />
+        <span
+          onClick={() => setIsShowSideBar((prev) => !prev)}
+          className="bg-[#9b4de0] rounded-sm opacity-90 cursor-pointer hover:opacity-100"
+        >
+          <i className="fa-solid fa-icons text-[20px] text-[#ffff] p-[5px] "></i>
+        </span>
+      </div>
     </div>
   );
 };
-
 export default Player;

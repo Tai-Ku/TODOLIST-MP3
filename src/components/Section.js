@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Section = () => {
   const { friday } = useSelector((state) => state.app);
+  console.log(friday);
   const negative = useNavigate();
   const handleClick = (item) => {
     negative(item?.link?.split(".")[0]);

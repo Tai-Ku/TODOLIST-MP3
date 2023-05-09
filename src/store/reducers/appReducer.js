@@ -13,7 +13,7 @@ const appReducer = (state = initialState, action) => {
           action.homeData?.find((item) => item.sectionId === "hSlider").items ||
           null,
         friday:
-          action.homeData?.find((item) => item.sectionId === "hSeasonTheme") ||
+          action.homeData?.find((item) => item.sectionId === "hEditorTheme") ||
           {},
       };
 

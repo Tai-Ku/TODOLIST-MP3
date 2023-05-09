@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as apis from "../../api";
 import moment, { months } from "moment";
-import { Lists } from "../../components";
+import { Lists, AudioLoading } from "../../components";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import { counter } from "@fortawesome/fontawesome-svg-core";
 
 import * as action from "../../store/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const Album = () => {
   const dispatch = useDispatch();
   const { title, pid } = useParams();
   const [playList, setPlayList] = useState({});
+
+  const { curSongId, isPlaying, atAlbum, songs } = useSelector(
+    (state) => state.music
+  );
+
   useEffect(() => {
     const fetchDetailPlaylist = async () => {
       const response = await apis.apiGetDetailPlaylist(pid);
@@ -26,11 +30,28 @@ const Album = () => {
   return (
     <div className="flex gap-8 w-full h-full px-[59px] bg-[#1a0b23 ] ">
       <div className="w-1/4 flex-none  flex flex-col items-center gap-2 ">
-        <img
-          src={playList?.thumbnailM}
-          alt="thumbnail"
-          className="w-full object-contain rounded-md shadow-md"
-        />
+        <div className="w-full relative overflow-hidden">
+          <img
+            src={playList?.thumbnailM}
+            alt="thumbnail"
+            className={`w-full object-contain ${
+              isPlaying
+                ? "rounded-full animate-rotate-center"
+                : "rounded-md animate-rotate-center-pause"
+            } shadow-md`}
+          />
+          <div
+            className={`absolute hover:bg-overplay-30 cursor-pointer top-0 bottom-0 left-0 right-0  text-white flex items-center justify-center ${
+              isPlaying && "rounded-full"
+            }`}
+          >
+            {isPlaying ? (
+              <AudioLoading />
+            ) : (
+              <i className="fa-solid fa-play text-center text-[30px] "></i>
+            )}
+          </div>
+        </div>
         <div className="flex-col flex items-center gap-1">
           <h3 className="text-[20px] font-bold text-[#fff]">
             {playList.title}
