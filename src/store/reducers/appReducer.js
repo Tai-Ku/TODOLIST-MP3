@@ -3,6 +3,9 @@ import actionTypes from "../actions/actionType";
 const initialState = {
   banner: [],
   friday: {},
+  newEveryDay: {},
+  top100: {},
+  album: {},
 };
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,6 +18,13 @@ const appReducer = (state = initialState, action) => {
         friday:
           action.homeData?.find((item) => item.sectionId === "hEditorTheme") ||
           {},
+        newEveryDay:
+          action.homeData?.find((item) => item.sectionId === "hEditorTheme2") ||
+          {},
+        top100:
+          action.homeData?.find((item) => item.sectionId === "h100") || {},
+        album:
+          action.homeData?.find((item) => item.sectionId === "hAlbum") || {},
       };
 
     default:

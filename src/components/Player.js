@@ -18,7 +18,6 @@ const Player = ({ setIsShowSideBar }) => {
   const [isShuffle, setIsShuffle] = useState(true);
   const [isRepeat, setIsRepeat] = useState(false);
   const [volume, setVolume] = useState(100);
-  const [isOffVolume, setIsOffVolume] = useState(true);
   const thumbRef = useRef();
   const trackRef = useRef();
   useEffect(() => {
@@ -231,9 +230,9 @@ const Player = ({ setIsShowSideBar }) => {
       <div className="w-[30%] flex-auto h-full border flex items-center justify-end gap-4">
         <span onClick={() => setVolume((prev) => (+prev === 0 ? 70 : 0))}>
           {volume > 0 ? (
-            <i class="fa-solid fa-volume-high"></i>
+            <i className="fa-solid fa-volume-high"></i>
           ) : (
-            <i class="fa-solid fa-volume-xmark"></i>
+            <i className="fa-solid fa-volume-xmark"></i>
           )}
         </span>
         <input
