@@ -6,6 +6,7 @@ const initialState = {
   newEveryDay: {},
   top100: {},
   album: {},
+  newRelease: {},
 };
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -25,8 +26,10 @@ const appReducer = (state = initialState, action) => {
           action.homeData?.find((item) => item.sectionId === "h100") || {},
         album:
           action.homeData?.find((item) => item.sectionId === "hAlbum") || {},
+        newRelease:
+          action.homeData?.find((item) => item.sectionType === "new-release") ||
+          {},
       };
-
     default:
       return state;
   }
