@@ -16,8 +16,9 @@ const Lists = ({ totalDuration }) => {
         <span>THỜI GIAN</span>
       </div>
       <div className="flex flex-col">
-        {songs?.map((item) => (
+        {songs?.map((item, index) => (
           <List
+            index={index.encodeId}
             key={item.encodeId}
             totalDuration={totalDuration}
             songData={item}

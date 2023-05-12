@@ -53,3 +53,17 @@ export const apiGetDetailPlaylist = (pid) =>
       reject(error);
     }
   });
+
+export const apiChartWeek = (pid) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios({
+        url: "/charthome",
+        method: "GET",
+        params: { id: pid },
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

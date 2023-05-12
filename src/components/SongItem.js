@@ -1,10 +1,21 @@
 import React from "react";
 import moment from "moment";
 import "moment/locale/vi";
+import * as action from "../store/actions";
+import * as api from "../api";
+import { useDispatch, useSelector } from "react-redux";
 
-const SongItem = ({ artistsNames, title, thumbnail, releaseDate }) => {
+const SongItem = ({ artistsNames, title, thumbnail, releaseDate, sid }) => {
+  const dispatch = useDispatch();
+  const { isPlaying } = useSelector((state) => state.music);
   return (
-    <div className="w-[45%] min-[1024px]:w-[30%] flex gap-[10px] items-center flex-auto p-[10px] hover:bg-[#2e2639] cursor-pointer relative">
+    <div
+      onClick={() => {
+        dispatch(action.setCurSongId(sid));
+        dispatch(action.play(!isPlaying));
+      }}
+      className="w-[45%] min-[1024px]:w-[30%] flex gap-[10px] items-center flex-auto p-[10px] hover:bg-[#2e2639] cursor-pointer relative"
+    >
       <img
         src={thumbnail}
         alt="thumbnail"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import * as apis from "../../api";
 import moment, { months } from "moment";
 import { Lists, AudioLoading, Loading } from "../../components";
@@ -12,6 +12,7 @@ const Album = () => {
   const { title, pid } = useParams();
   const [playList, setPlayList] = useState({});
   const [isLoaded, setIsLoaded] = useState(true);
+  const location = useLocation();
 
   const { curSongId, isPlaying, atAlbum, songs } = useSelector(
     (state) => state.music
@@ -28,7 +29,19 @@ const Album = () => {
     };
     fetchDetailPlaylist();
   }, [pid]);
-
+  useEffect(() => {
+    if (location?.state?.play) {
+      const randomIndex =
+        Math.round(Math.random() * playList?.song?.items?.length) - 1;
+      console.log(playList?.song?.items[randomIndex]?.encodeId);
+      dispatch(
+        action.setCurSongId(playList?.song?.items[randomIndex]?.encodeId)
+      );
+      isPlaying
+        ? dispatch(action.play(!isPlaying))
+        : dispatch(action.play(!isPlaying));
+    }
+  }, [pid, playList]);
   return (
     <div className="flex gap-8 w-full h-full px-[59px] bg-[#1a0b23 ] ">
       {isLoaded ? (

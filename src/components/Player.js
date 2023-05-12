@@ -15,7 +15,7 @@ const Player = ({ setIsShowSideBar }) => {
   const [isLoaded, setIsLoaded] = useState(true);
   const [songInfo, setSongInfo] = useState(null);
   const [audio, setAudio] = useState(new Audio());
-  const [isShuffle, setIsShuffle] = useState(true);
+  const [isShuffle, setIsShuffle] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
   const [volume, setVolume] = useState(100);
   const thumbRef = useRef();

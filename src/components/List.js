@@ -1,15 +1,23 @@
 import moment from "moment";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "../store/actions";
 
-const List = ({ songData, totalDuration }) => {
+const List = ({ songData, index }) => {
   const dispatch = useDispatch();
-  const { isPlaying } = useSelector((state) => state.music);
+  const { isPlaying, curSongId } = useSelector((state) => state.music);
+  const active = document.querySelector(".active");
+  useEffect(() => {
+    if (active) {
+      active.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [active]);
   return (
     <div
-      className="flex items-center justify-between p-[10px] border-t border-[#26172e] hover:bg-[#2e2639] cursor-pointer"
+      className={`${
+        songData.encodeId === curSongId && "active bg-[#2e2639]"
+      } flex items-center justify-between p-[10px] border-t border-[#26172e]  hover:bg-[#2e2639] cursor-pointer`}
       onClick={() => {
         dispatch(action.setCurSongId(songData.encodeId));
         dispatch(action.play(!isPlaying));

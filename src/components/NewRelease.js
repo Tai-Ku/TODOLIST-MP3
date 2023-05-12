@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SongItem from "./SongItem";
+import * as action from "../store/actions";
 
 const NewRelease = () => {
   const { newRelease } = useSelector((state) => state.app);
+  const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(0);
   const [newSong, setNewSong] = useState(newRelease?.items?.all);
   useEffect(() => {
@@ -15,6 +17,7 @@ const NewRelease = () => {
       setNewSong(newRelease?.items?.others);
     }
   }, [isActive, newRelease]);
+
   return (
     <div className="mt-12 px-[59px] flex flex-col gap-5">
       <div className="flex justify-between items-center">
@@ -66,6 +69,7 @@ const NewRelease = () => {
             title={item?.title}
             thumbnail={item?.thumbnail}
             releaseDate={item?.releaseDate}
+            sid={item.encodeId}
           />
         ))}
       </div>

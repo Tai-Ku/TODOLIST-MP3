@@ -1,12 +1,7 @@
 import React, { memo } from "react";
 import { useNavigate } from "react-router-dom";
-
+import SectionItem from "./SectionItem";
 const Section = ({ data }) => {
-  const negative = useNavigate();
-  const handleClick = (item) => {
-    negative(item?.link?.split(".")[0]);
-  };
-  const checkData = data?.sectionId === "h100" || data?.sectionId === "hAlbum";
   return (
     <div className="mt-12 px-[59px] flex flex-col gap-5 ">
       <div className="flex justify-between items-center">
@@ -15,27 +10,15 @@ const Section = ({ data }) => {
       </div>
       <div className="flex flex-row w-full gap-[28px] ">
         {data?.items?.slice(0, 5).map((item) => (
-          <div
+          <SectionItem
             key={item.encodeId}
-            onClick={() => handleClick(item)}
-            className="w-1/5 flex flex-col gap-3 cursor-pointer"
-          >
-            <img
-              src={item?.thumbnailM}
-              className="rounded-lg h-auto object-cover w-full"
-            />
-            <span className="flex flex-col text-sm text-[#ffffff80]">
-              {checkData && <span>{item.title}</span>}
-              {checkData ? (
-                <span>{item.artistsNames}</span>
-              ) : item?.sortDescription.length > 50 ? (
-                `${item?.sortDescription.slice(0, 50)}...`
-              ) : (
-                item?.sortDescription
-              )}
-              {}
-            </span>
-          </div>
+            link={item?.link}
+            thumbnailM={item?.thumbnailM}
+            sortDescription={item?.sortDescription}
+            artistsNames={item?.artistsNames}
+            title={item?.title}
+            data={data}
+          />
         ))}
       </div>
     </div>
