@@ -21,7 +21,6 @@ const Section = ({ data }) => {
           />
         ))}
       </div>
-      <div className="text-commit"></div>
     </div>
   );
 };

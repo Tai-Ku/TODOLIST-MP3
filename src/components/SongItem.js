@@ -12,8 +12,10 @@ const SongItem = ({
   releaseDate,
   sid,
   rank,
+  style,
   score,
 }) => {
+  console.log(style);
   const dispatch = useDispatch();
   const { isPlaying } = useSelector((state) => state.music);
   const [isHover, setIsHover] = useState(false);
@@ -26,7 +28,7 @@ const SongItem = ({
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       className={`${
-        rank ? "bg-overplay-30 " : ""
+        style || ""
       } w-full flex gap-[10px] justify-between items-center  p-[10px]  cursor-pointer relative`}
     >
       {isHover && (
@@ -46,7 +48,19 @@ const SongItem = ({
         </div>
       )}
       <div className="flex items-center gap-4 ">
-        {rank && <span className="">{rank}</span>}
+        {rank && (
+          <span
+            className={`${
+              rank === 1
+                ? "text-shadow-1"
+                : rank === 2
+                ? "text-shadow-2"
+                : "text-shadow-3"
+            } text-[30px] text-[rgba(0,0,0,0.3)]`}
+          >
+            {rank}
+          </span>
+        )}
         <img
           src={thumbnail}
           alt="thumbnail"
@@ -54,7 +68,7 @@ const SongItem = ({
         />
         <div className="flex flex-col gap-1 ">
           <span className="text-sm font-semibold text-[#ffff]">{title}</span>
-          <span className="text-xs huhu font-thin text-[#ffffff80]">
+          <span className="text-xs  font-thin text-[#ffffff80]">
             {artistsNames}
           </span>
           {!rank && (
@@ -65,7 +79,7 @@ const SongItem = ({
         </div>
       </div>
       <div className="flex-auto">
-        {score && <span className="float-left flex ">{score}%</span>}
+        {score && <span className="float-left font-bold flex ">{score}%</span>}
       </div>
       <div className="hover:absolute bg-black top-0 bottom-0 left-0 right-0 flex "></div>
     </div>
