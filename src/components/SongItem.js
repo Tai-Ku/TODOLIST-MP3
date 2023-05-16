@@ -54,7 +54,7 @@ const SongItem = ({
         />
         <div className="flex flex-col gap-1 ">
           <span className="text-sm font-semibold text-[#ffff]">{title}</span>
-          <span className="text-xs font-thin text-[#ffffff80]">
+          <span className="text-xs huhu font-thin text-[#ffffff80]">
             {artistsNames}
           </span>
           {!rank && (
