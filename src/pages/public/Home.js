@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Section, Slider, NewRelease } from "../../components";
+import { Section, Slider, NewRelease, ChartSection } from "../../components";
 import { useSelector } from "react-redux";
 
 function Home() {
@@ -12,6 +12,7 @@ function Home() {
         <Section data={friday} />
         <Section data={newEveryDay} />
         <NewRelease />
+        <ChartSection />
         <Section data={top100} />
         <Section data={album} />
         <Section data={hArtistTheme} />

@@ -9,6 +9,8 @@ const initialState = {
   newRelease: {},
   weekChart: [],
   hArtistTheme: {},
+  chart: {},
+  rank: [],
 };
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -37,6 +39,12 @@ const appReducer = (state = initialState, action) => {
         hArtistTheme:
           action.homeData?.find((item) => item.sectionId === "hArtistTheme") ||
           {},
+        chart:
+          action.homeData?.find((item) => item.sectionId === "hZC")?.chart ||
+          {},
+        rank:
+          action.homeData?.find((item) => item.sectionId === "hZC")?.items ||
+          [],
       };
     default:
       return state;

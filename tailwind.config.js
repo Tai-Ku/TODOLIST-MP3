@@ -115,6 +115,8 @@ module.exports = {
         "main-400": "#C0D8D8",
         "main-500": "#0E8080",
         "overplay-30": "rgba(0,0,0,0.3)",
+        "text-zingchart":
+          "linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%)",
       },
       colors: {
         "main-100": "#E7ECEC",
@@ -210,6 +212,9 @@ module.exports = {
       },
       flex: {
         4: "4 4 0%",
+        6: "6 6 0%",
+        3: "3 3 0%",
+        7: "7 7 0%",
       },
     },
     screens: {

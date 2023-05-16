@@ -79,7 +79,14 @@ const Player = ({ setIsShowSideBar }) => {
       intervalId = setInterval(() => {
         let percent =
           Math.round((audio.currentTime * 10000) / songInfo?.duration) / 100;
-        thumbRef.current.style.cssText = `right: ${100 - percent}%`;
+
+        if (thumbRef.current !== null) {
+          // Thực hiện các thao tác trên thumbRef.current ở đây
+          thumbRef.current.style.cssText = `right: ${100 - percent}%`;
+        } else {
+          // Xử lý trường hợp thumbRef.current là null ở đây
+          console.log("thumbRef.current is null");
+        }
         setSecond(Math.round(audio.currentTime));
       }, 300);
     } else {
