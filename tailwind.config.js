@@ -115,6 +115,7 @@ module.exports = {
         "main-400": "#C0D8D8",
         "main-500": "#0E8080",
         "overplay-30": "rgba(0,0,0,0.3)",
+        "overplay-10": "rgba(0,0,0,0.01)",
         "text-zingchart":
           "linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%)",
       },

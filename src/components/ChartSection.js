@@ -6,6 +6,8 @@ import { Chart } from "chart.js/auto";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import SongItem from "./SongItem";
+import { Link } from "react-router-dom";
+import path from "../untils/path";
 const ChartSection = () => {
   const absoluteChart = "absolute top-0 left-[59px] right-[59px] bottom-0";
   const [data, setData] = useState(null);
@@ -105,18 +107,26 @@ const ChartSection = () => {
       setData({ labels, datasets });
     }
   }, [chart]);
-  console.log(rank);
   return (
-    <div className="px-[59px] mt-3 relative max-h-[400px] rounded-md">
+    <div className="px-[59px] mt-3 relative max-h-[440px] rounded-md">
       <img
         src={bgChart}
-        className="w-full object-contain  rounded-md max-h-[400px]"
+        className="w-full object-contain  rounded-md max-h-[440px]"
       />
       <div
         className={`${absoluteChart}  bg-[rgba(77,34,104,0.9)] rounded-md`}
       ></div>
       <div className={`${absoluteChart} p-5 flex flex-col gap-8 rounded-md`}>
-        <h3 className="text-2xl font-bold text-[#ffff]">#zingchart</h3>
+        <Link to={path.ZING__CHART}>
+          <div className="flex items-center gap-3">
+            <h3 className="text-2xl font-bold text-[#ffff] hover:text-blue-800">
+              #zingchart
+            </h3>
+            <span className="border bg-white cursor-pointer rounded-full">
+              <i className="fa-solid fa-play text-[16px] text-center text-[#000000] p-2 "></i>
+            </span>
+          </div>
+        </Link>
         <div className="flex gap-4 h-full ">
           <div className="flex-3 flex flex-col gap-4">
             {rank?.slice(0, 3).map((item, index) => (
@@ -132,11 +142,16 @@ const ChartSection = () => {
                 style="text-white bg-overplay-30"
               />
             ))}
+            <Link to={path.ZING__CHART} className="m-auto">
+              <span className="text-xl cursor-pointer hover:bg-overplay-30 font-normal m-auto px-4 py-1 text-white rounded-l-full rounded-r-full w-fit text-center border border-white">
+                Xem Thêm
+              </span>
+            </Link>
           </div>
           <div className="flex-7 h-[90%] relative">
             {data && <Line data={data} ref={chartRef} options={options} />}
             <div
-              className="tooltip "
+              className="tooltip"
               style={{
                 top: tooltipState.top,
                 left: tooltipState.left,
