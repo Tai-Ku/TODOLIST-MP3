@@ -4,6 +4,7 @@ import "moment/locale/vi";
 import * as action from "../store/actions";
 import * as api from "../api";
 import { useDispatch, useSelector } from "react-redux";
+import AudioLoading from "./AudioLoading";
 
 const SongItem = ({
   artistsNames,
@@ -11,11 +12,13 @@ const SongItem = ({
   thumbnail,
   releaseDate,
   sid,
+  audio,
+
+  sm,
   rank,
   style,
   score,
 }) => {
-  console.log(style);
   const dispatch = useDispatch();
   const { isPlaying } = useSelector((state) => state.music);
   const [isHover, setIsHover] = useState(false);
@@ -33,9 +36,9 @@ const SongItem = ({
     >
       {isHover && (
         <div
-          className={`absolute top-0 bottom-0 left-0 right-0 w-full flex justify-between px-4 items-center ${
-            rank ? "bg-[#ffffff33] px-7" : " bg-overplay-30"
-          } `}
+          className={`absolute top-0 bottom-0 left-0 right-0 w-full flex justify-between ${
+            sm ? "px-[6px]" : "px-4"
+          } items-center ${rank ? "bg-[#ffffff33] px-7" : " bg-overplay-30"} `}
         >
           <span className=" w-[51px] text-center cursor-pointer">
             <i className="fa-solid fa-play text-[18px]  text-[#ffff] px-1 "></i>
@@ -64,14 +67,25 @@ const SongItem = ({
         <img
           src={thumbnail}
           alt="thumbnail"
-          className="w-[60px] h-[60px] object-cover rounded-md"
+          className={`${
+            sm ? "w-[40px] h-[40px]" : "w-[60px] h-[60px]"
+          } object-cover rounded-md`}
         />
         <div className="flex flex-col gap-1 ">
           <span className="text-sm font-semibold text-[#ffff]">{title}</span>
-          <span className="text-xs  font-thin text-[#ffffff80]">
+          {sm && (
+            <div
+              className={`absolute top-0 bottom-0 left-[7%] right-0 w-full `}
+            >
+              <span className=" w-[14px] text-center cursor-pointer absolute">
+                {isPlaying && audio && <AudioLoading />}
+              </span>
+            </div>
+          )}
+          <span className="text-xs font-thin text-[#ffffff80]">
             {artistsNames}
           </span>
-          {!rank && (
+          {releaseDate && (
             <span className="text-xs font-thin text-[#ffffff80]">
               {moment(releaseDate * 1000).fromNow()}
             </span>

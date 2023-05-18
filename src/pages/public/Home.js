@@ -17,8 +17,8 @@ function Home() {
         <Section data={album} />
         <Section data={hArtistTheme} />
         <div className="flex items-center px-[59px] gap-7 mt-12 ">
-          {weekChart.map((item) => (
-            <Link key={item?.encodeId} to={item?.link?.split(".")[0]}>
+          {weekChart.map((item, index) => (
+            <Link key={index} to={item?.link?.split(".")[0]}>
               <img
                 className="object-cover rounded-md"
                 src={item?.cover}

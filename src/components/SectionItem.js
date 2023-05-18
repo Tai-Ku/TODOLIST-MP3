@@ -1,21 +1,31 @@
 import React, { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import * as action from "../store/actions";
 
 const SectionItem = ({
   link,
   thumbnailM,
   sortDescription,
   data,
+  audio,
   artistsNames,
   title,
 }) => {
+  const { pid } = useParams();
   const checkData = data?.sectionId === "h100" || data?.sectionId === "hAlbum";
   const negative = useNavigate();
   const { isplaying } = useSelector((state) => state.music);
   const [isHover, setIsHover] = useState(false);
   const [isHoverText, setIsHoverText] = useState(false);
   const dispatch = useDispatch();
+  const handleClickP = () => {
+    negative(link?.split(".")[0]);
+    let url = link?.split(".")[0];
+    let parts = url.split("/");
+    let pid = parts[parts.length - 1];
+    dispatch(action.SetPidPlayList(pid));
+  };
   const handleClick = (e) => {
     e.stopPropagation();
     negative(link?.split(".")[0], {
@@ -23,13 +33,11 @@ const SectionItem = ({
         play: true,
       },
     });
-
-    console.log(123);
   };
 
   return (
     <div
-      onClick={() => negative(link?.split(".")[0])}
+      onClick={handleClickP}
       className="w-1/5 flex flex-col gap-3 cursor-pointer "
     >
       <div
@@ -44,7 +52,7 @@ const SectionItem = ({
           } rounded-lg h-auto object-cover w-full`}
         />
         {isHover ? (
-          <div className="flex justify-around  items-center rounded-lg absolute top-0 bottom-0 left-0 right-0 bg-overplay-30 px-4">
+          <div className=" flex justify-around  items-center rounded-lg absolute top-0 bottom-0 left-0 right-0 bg-overplay-30 px-4">
             <span>
               <i className="fa-regular fa-heart text-[18px]  text-[#ffff]"></i>
             </span>

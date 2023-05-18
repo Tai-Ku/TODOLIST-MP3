@@ -6,9 +6,9 @@ import logo from "../assets/logo.svg";
 import { sidebarMenu } from "../untils/menu";
 
 const notActive =
-  "flex items-center justify-start text-[#dadada] hover:opacity-100 hover:font-bold text-[13px] gap-2 py-2 px-[25px] opacity-90 font-medium ";
+  "flex items-center justify-start text-[#dadada] hover:text-white hover:bg-overplay-30 text-[13px] gap-2 py-2 px-[25px] opacity-90 font-medium ";
 const active =
-  "flex items-center justify-start text-[#fafafa] bg-[#3c2f44] text-[13px] gap-2 py-2 px-[25px] opacity-100 font-bold";
+  "flex items-center border-[3px] border-t-transparent border-b-transparent border-r-transparent border-l-[#af0ce2] justify-start text-[#fafafa] bg-[#3c2f44] text-[13px] gap-2 py-2 px-[25px] opacity-100 font-bold";
 const SidebarLeft = () => {
   const navigate = useNavigate();
   return (

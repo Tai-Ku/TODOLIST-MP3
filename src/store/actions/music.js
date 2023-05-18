@@ -1,5 +1,5 @@
-import actionTypes from "./actionType";
 import * as api from "../../api";
+import actionTypes from "./actionType";
 
 export const setCurSongId = (sid) => ({
   type: actionTypes.SET_CUR_SONG_ID,
@@ -16,6 +16,14 @@ export const playAlbum = (flag) => ({
 export const setPlaylist = (songs) => ({
   type: actionTypes.PLAY_LIST,
   songs,
+});
+export const setCurSongData = (data) => ({
+  type: actionTypes.SET_CUR_SONG_DATA,
+  data,
+});
+export const SetPidPlayList = (pid) => ({
+  type: actionTypes.SET_PID_PLAYLIST,
+  pid,
 });
 // export const fetchDetailPlaylist = (pid) => async (dispatch) => {
 //   try {

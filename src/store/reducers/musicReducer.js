@@ -2,9 +2,11 @@ import actionTypes from "../actions/actionType";
 
 const initialState = {
   curSongId: null,
+  curSongData: null,
   isPlaying: false,
   atAlbum: false,
   songs: null,
+  pid: null,
 };
 const musicReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -28,6 +30,16 @@ const musicReducer = (state = initialState, action) => {
       return {
         ...state,
         songs: action.songs || null,
+      };
+    case actionTypes.SET_CUR_SONG_DATA:
+      return {
+        ...state,
+        curSongData: action.data || null,
+      };
+    case actionTypes.SET_PID_PLAYLIST:
+      return {
+        ...state,
+        pid: action.pid || null,
       };
 
     default:

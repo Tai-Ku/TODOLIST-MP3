@@ -11,6 +11,7 @@ import {
   Album,
   WeekRank,
   ZingChart,
+  Follow,
 } from "./pages/public";
 import path from "./untils/path";
 import * as action from "./store/actions";
@@ -37,6 +38,7 @@ function App() {
             <Route path={path.HOME} element={<Home />} />
             <Route path={path.Login} element={<Login />} />
             <Route path={path.MY_MUSIC} element={<Personal />} />
+            <Route path={path.Follow} element={<Follow />} />
             <Route path={path.ALBUM__TITLE_PID} element={<Album />} />
             <Route path={path.PLAYLIST__TITLE_PID} element={<Album />} />
             <Route path={path.WEEKRANK__TITLE__PID} element={<WeekRank />} />

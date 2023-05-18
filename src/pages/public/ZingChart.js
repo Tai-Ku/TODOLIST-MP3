@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const ZingChart = () => {
   return (
-    <div>ZingChart</div>
-  )
-}
+    <div className="text-2xl text-white m-auto">
+      CHỨC NĂNG CHƯA ĐƯỢC PHÁT TRIỂN
+    </div>
+  );
+};
 
-export default ZingChart
+export default ZingChart;

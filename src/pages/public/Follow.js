@@ -1,7 +1,6 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 
-const Personal = () => {
+const Follow = () => {
   return (
     <div className="text-2xl text-white m-auto">
       CHỨC NĂNG CHƯA ĐƯỢC PHÁT TRIỂN
@@ -9,4 +8,4 @@ const Personal = () => {
   );
 };
 
-export default Personal;
+export default Follow;

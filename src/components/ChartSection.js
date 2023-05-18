@@ -136,7 +136,6 @@ const ChartSection = () => {
                 artistsNames={item?.artistsNames}
                 title={item?.title}
                 thumbnail={item?.thumbnail}
-                releaseDate={item?.releaseDate}
                 sid={item.encodeId}
                 score={Math.round((item?.score / chart?.totalScore) * 100)}
                 style="text-white bg-overplay-30"

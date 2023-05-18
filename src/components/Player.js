@@ -31,6 +31,7 @@ const Player = ({ setIsShowSideBar }) => {
 
       if (res1.data.err === 0) {
         setSongInfo(res1.data.data);
+        dispatch(action.setCurSongData(res1.data.data));
       }
       if (res2.data.err === 0) {
         audio.pause();
@@ -144,7 +145,7 @@ const Player = ({ setIsShowSideBar }) => {
   }, [volume]);
   return (
     <div className="flex w-full px-5 justify-center items-center h-full">
-      <div className="w-[30%] flex-auto h-full border flex items-center gap-2">
+      <div className="w-[30%] flex-auto h-full  flex items-center gap-2">
         <img
           src={songInfo?.thumbnail}
           alt="thumbnail"
@@ -168,7 +169,7 @@ const Player = ({ setIsShowSideBar }) => {
           </span>
         </div>
       </div>
-      <div className="w-[40%] flex flex-col  gap-1 items-center h-full border p-1">
+      <div className="w-[40%] flex flex-col  gap-1 items-center h-full  p-1">
         <div className="flex gap-5 justify-center items-center">
           <span
             title="Bật phát ngẫu nhiên"
@@ -234,7 +235,7 @@ const Player = ({ setIsShowSideBar }) => {
           </span>
         </div>
       </div>
-      <div className="w-[30%] flex-auto h-full border flex items-center justify-end gap-4">
+      <div className="w-[30%] flex-auto h-full  flex items-center justify-end gap-4">
         <span onClick={() => setVolume((prev) => (+prev === 0 ? 70 : 0))}>
           {volume > 0 ? (
             <i className="fa-solid fa-volume-high"></i>

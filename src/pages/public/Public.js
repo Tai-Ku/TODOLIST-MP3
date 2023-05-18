@@ -22,12 +22,12 @@ function Public() {
           </div>
         </div>
         {isShowSideBar && (
-          <div className="w-[329px] hidden 1280:flex flex-none animate-slide-left border">
+          <div className="w-[329px] hidden fixed top-0  right-0 bottom-0 bg-[#120822] 1280:block z-40 animate-slide-left ">
             <SidebarRight />
           </div>
         )}
       </div>
-      <div className="h-[90px] fixed bottom-0 left-0 right-0 flex-none w-full bg-[#15091c]">
+      <div className="h-[90px] z-50 fixed bottom-0 left-0 right-0 flex-none w-full bg-[#15091c]">
         <Player setIsShowSideBar={setIsShowSideBar} />
       </div>
     </div>

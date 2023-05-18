@@ -8,7 +8,7 @@ const Section = ({ data }) => {
         <h3 className="text-xl font-medium text-[#ffff]">{data?.title}</h3>
         <h2 className="text-[12px] text-[#ffffff80]">TẤT CẢ</h2>
       </div>
-      <div className="flex flex-row w-full gap-[28px] ">
+      <div className="flex  flex-row w-full gap-[28px] ">
         {data?.items?.slice(0, 5).map((item) => (
           <SectionItem
             key={item.encodeId}

@@ -2,6 +2,7 @@ const path = {
   PUBLIC: "/*",
   HOME: "",
   Login: "login",
+  Follow: "follow",
   STAR: "*",
   MY_MUSIC: "mymusic",
   ALBUM__TITLE_PID: "album/:title/:pid",
