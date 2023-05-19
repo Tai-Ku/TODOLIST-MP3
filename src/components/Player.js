@@ -9,7 +9,7 @@ var intervalId;
 const Player = ({ setIsShowSideBar }) => {
   const dispatch = useDispatch();
   const [second, setSecond] = useState(0);
-  const { curSongId, isPlaying, atAlbum, songs } = useSelector(
+  const { curSongId, isPlaying, playListWatched, songs } = useSelector(
     (state) => state.music
   );
   const [isLoaded, setIsLoaded] = useState(true);
@@ -28,7 +28,6 @@ const Player = ({ setIsShowSideBar }) => {
         api.apiGetSong(curSongId),
       ]);
       setIsLoaded(true);
-
       if (res1.data.err === 0) {
         setSongInfo(res1.data.data);
         dispatch(action.setCurSongData(res1.data.data));

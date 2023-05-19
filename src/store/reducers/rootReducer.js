@@ -14,7 +14,7 @@ const musicConfig = {
   ...commonConfig,
   key: "music",
   // whilelist là những thèn mình muốn lưu trong loacal
-  whilelist: ["curSongId", "curSongData", "pid"],
+  whilelist: ["curSongId", "curSongData", "pid", "recentSongs"],
 };
 const rootReducer = combineReducers({
   app: appReducer,

@@ -3,11 +3,12 @@ const actionTypes = {
   SET_CUR_SONG_ID: "SET_CUR_SONG_ID",
   SET_CUR_SONG_DATA: "SET_CUR_SONG_DATA",
   SET_PID_PLAYLIST: "SET_PID_PLAYLIST",
-
+  SET_RECENT_SONGS: "SET_RECENT_SONGS",
   // music
 
   PLAY: "PLAY",
   SET_ALBUM: "SET_ALBUM",
+  PLAY_LIST: "PLAY_LIST",
   PLAY_LIST: "PLAY_LIST",
 };
 export default actionTypes;

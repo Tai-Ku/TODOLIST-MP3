@@ -13,7 +13,6 @@ const SongItem = ({
   releaseDate,
   sid,
   audio,
-
   sm,
   rank,
   style,

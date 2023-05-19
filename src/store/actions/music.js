@@ -25,6 +25,11 @@ export const SetPidPlayList = (pid) => ({
   type: actionTypes.SET_PID_PLAYLIST,
   pid,
 });
+export const SetRecentSongs = (data) => ({
+  type: actionTypes.SET_RECENT_SONGS,
+  data,
+});
+
 // export const fetchDetailPlaylist = (pid) => async (dispatch) => {
 //   try {
 //     const response = await api.apiGetDetailPlaylist(pid);

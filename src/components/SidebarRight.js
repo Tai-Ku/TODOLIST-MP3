@@ -3,14 +3,29 @@ import { useSelector } from "react-redux";
 import SongItem from "./SongItem";
 import AudioLoading from "./AudioLoading";
 import * as api from "../api";
-import { play } from "../store/actions";
 import { Scrollbars } from "react-custom-scrollbars-2";
 const SidebarRight = () => {
   const [isActive, setIsActive] = useState(0);
   const { curSongData } = useSelector((state) => state.music);
-  const { pid } = useSelector((state) => state.music);
+  const { pid, recentSongs, isPlaying, curSongId } = useSelector(
+    (state) => state.music
+  );
   const [playList, setPlayList] = useState(null);
   const [title, setTitle] = useState(null);
+  // let uniqueSongs = recentSongs.filter((song, index) => {
+  //   const _song = JSON.stringify(song);
+  //   return (
+  //     index ===
+  //     recentSongs.findIndex((obj) => {
+  //       return JSON.stringify(obj) === _song;
+  //     })
+  //   );
+  // });
+
+  // console.log(uniqueSongs);
+  useEffect(() => {
+    isPlaying && setIsActive(0);
+  }, [curSongId]);
   useEffect(() => {
     const fetchDetailPlaylist = async () => {
       const response = await api.apiGetDetailPlaylist(pid);
@@ -21,7 +36,6 @@ const SidebarRight = () => {
     };
     fetchDetailPlaylist();
   }, [pid]);
-  console.log(title);
   return (
     <Scrollbars autoHide style={{ width: "100%", height: "100%" }}>
       <div className="flex flex-col  text-xs ">
@@ -46,18 +60,18 @@ const SidebarRight = () => {
           </div>
         </div>
         <div>
-          <div key={curSongData.encodeId} className="w-full py-[14px]   px-2 ">
+          <div key={curSongData?.encodeId} className="w-full py-[14px]   px-2 ">
             {isActive === 0 ? (
               <div className="w-full">
                 <SongItem
                   style="bg-[#af0ce2] rounded-md"
                   audio={true}
-                  key={curSongData.encodeId}
+                  key={curSongData?.encodeId}
                   sm={true}
                   artistsNames={curSongData?.artistsNames}
                   title={curSongData?.title}
                   thumbnail={curSongData?.thumbnail}
-                  sid={curSongData.encodeId}
+                  sid={curSongData?.encodeId}
                 />
                 <div className="flex flex-col pt-[15px] px-2 pb-[5px] text-sm">
                   <span className="text-white">Tiếp theo</span>
@@ -68,21 +82,29 @@ const SidebarRight = () => {
                   {playList?.map((item) => (
                     <SongItem
                       style="rounded-md"
-                      key={item.encodeId}
+                      key={item?.encodeId}
                       sm={true}
                       artistsNames={item?.artistsNames}
                       title={item?.title}
                       thumbnail={item?.thumbnail}
-                      sid={item.encodeId}
+                      sid={item?.encodeId}
                     />
                   ))}
                 </div>
               </div>
             ) : (
-              <div className="flex">
-                <h2 className="text-2xl m-auto text-white">
-                  Chức năng đang được phát triển
-                </h2>
+              <div className="flex flex-col pt-[15px] px-2 pb-[5px] text-sm">
+                {recentSongs.map((item) => (
+                  <SongItem
+                    style="rounded-md"
+                    key={item?.encodeId}
+                    sm={true}
+                    artistsNames={item?.artistsNames}
+                    title={item?.title}
+                    thumbnail={item?.thumbnail}
+                    sid={item?.encodeId}
+                  />
+                ))}
               </div>
             )}
           </div>

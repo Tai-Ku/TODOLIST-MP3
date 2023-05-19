@@ -21,8 +21,14 @@ const List = ({ songData, index }) => {
       onClick={() => {
         dispatch(action.setCurSongId(songData.encodeId));
         dispatch(action.play(!isPlaying));
-        // dispatch(action.play(true));
-
+        dispatch(
+          action.SetRecentSongs({
+            thumbnail: songData.thumbnail,
+            artistsNames: songData?.artistsNames,
+            title: songData?.title,
+            sid: songData?.encodeId,
+          })
+        );
         dispatch(action.playAlbum(true));
       }}
     >

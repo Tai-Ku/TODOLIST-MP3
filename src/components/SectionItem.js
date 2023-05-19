@@ -8,7 +8,6 @@ const SectionItem = ({
   thumbnailM,
   sortDescription,
   data,
-  audio,
   artistsNames,
   title,
 }) => {
