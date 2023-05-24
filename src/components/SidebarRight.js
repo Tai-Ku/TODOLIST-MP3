@@ -12,17 +12,6 @@ const SidebarRight = () => {
   );
   const [playList, setPlayList] = useState(null);
   const [title, setTitle] = useState(null);
-  // let uniqueSongs = recentSongs.filter((song, index) => {
-  //   const _song = JSON.stringify(song);
-  //   return (
-  //     index ===
-  //     recentSongs.findIndex((obj) => {
-  //       return JSON.stringify(obj) === _song;
-  //     })
-  //   );
-  // });
-
-  // console.log(uniqueSongs);
   useEffect(() => {
     isPlaying && setIsActive(0);
   }, [curSongId]);
@@ -37,30 +26,40 @@ const SidebarRight = () => {
     fetchDetailPlaylist();
   }, [pid]);
   return (
-    <Scrollbars autoHide style={{ width: "100%", height: "100%" }}>
-      <div className="flex flex-col  text-xs ">
-        <div className="flex items-center h-[70px] py-[14px] px-2 flex-none border border-[#fff]">
-          <div className="flex cursor-pointer m-auto  p-1 rounded-r-full rounded-l-full bg-[#2d1e39]">
-            <span
-              onClick={() => setIsActive(0)}
-              className={`${
-                isActive === 0 ? "bg-[#696475] text-white" : "text-[#8f8c96]"
-              } rounded-full font-light pr-2 pl-4 py-2 `}
-            >
-              Danh sách phát
-            </span>
-            <span
-              onClick={() => setIsActive(1)}
-              className={`${
-                isActive === 1 ? "bg-[#696475] text-white" : "text-[#8f8c96]"
-              } rounded-full font-light pl-3 pr-4 py-2 `}
-            >
-              Nghe gần đây
-            </span>
-          </div>
+    <div className="flex flex-col h-full text-xs ">
+      <div className="flex items-center h-[70px] py-[14px] px-2 flex-none ">
+        <div className="flex cursor-pointer m-auto  p-1 rounded-r-full rounded-l-full bg-[#2d1e39]">
+          <span
+            onClick={() => setIsActive(0)}
+            className={`${
+              isActive === 0 ? "bg-[#696475] text-white" : "text-[#8f8c96]"
+            } rounded-full font-light pr-2 pl-4 py-2 `}
+          >
+            Danh sách phát
+          </span>
+
+          <span
+            onClick={() => setIsActive(1)}
+            className={`${
+              isActive === 1 ? "bg-[#696475] text-white" : "text-[#8f8c96]"
+            } rounded-full font-light pl-3 pr-4 py-2 `}
+          >
+            Nghe gần đây
+          </span>
         </div>
-        <div>
-          <div key={curSongData?.encodeId} className="w-full py-[14px]   px-2 ">
+      </div>
+      <div className="w-full h-full">
+        <div
+          key={curSongData?.encodeId}
+          className="w-full py-[14px] h-full px-2 "
+        >
+          <Scrollbars
+            autoHide
+            style={{ width: "100%", height: "100%" }}
+            renderView={({ style, ...props }) => (
+              <div {...props} style={{ ...style, overflowX: "hidden" }} />
+            )}
+          >
             {isActive === 0 ? (
               <div className="w-full">
                 <SongItem
@@ -79,10 +78,10 @@ const SidebarRight = () => {
                     Từ playlist:
                     <span className="text-[#c273ed]"> #{title}</span>
                   </span>
-                  {playList?.map((item) => (
+                  {playList?.map((item, i) => (
                     <SongItem
                       style="rounded-md"
-                      key={item?.encodeId}
+                      key={item?.encodeId || i}
                       sm={true}
                       artistsNames={item?.artistsNames}
                       title={item?.title}
@@ -94,10 +93,10 @@ const SidebarRight = () => {
               </div>
             ) : (
               <div className="flex flex-col pt-[15px] px-2 pb-[5px] text-sm">
-                {recentSongs.map((item) => (
+                {recentSongs.map((item, i) => (
                   <SongItem
                     style="rounded-md"
-                    key={item?.encodeId}
+                    key={item?.encodeId || i}
                     sm={true}
                     artistsNames={item?.artistsNames}
                     title={item?.title}
@@ -107,10 +106,10 @@ const SidebarRight = () => {
                 ))}
               </div>
             )}
-          </div>
+          </Scrollbars>
         </div>
       </div>
-    </Scrollbars>
+    </div>
   );
 };
 

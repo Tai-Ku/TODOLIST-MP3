@@ -21,11 +21,20 @@ const SongItem = ({
   const dispatch = useDispatch();
   const { isPlaying } = useSelector((state) => state.music);
   const [isHover, setIsHover] = useState(false);
+
   return (
     <div
       onClick={() => {
         dispatch(action.setCurSongId(sid));
         dispatch(action.play(!isPlaying));
+        dispatch(
+          action.SetRecentSongs({
+            thumbnail,
+            artistsNames,
+            title,
+            sid,
+          })
+        );
       }}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}

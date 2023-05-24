@@ -22,7 +22,7 @@ function Public() {
           </div>
         </div>
         {isShowSideBar && (
-          <div className="w-[329px] hidden fixed top-0  right-0 bottom-0 bg-[#120822] 1280:block z-40 animate-slide-left ">
+          <div className="w-[329px] hidden fixed top-0  right-0 bottom-0 bg-[#120822] 1280:block z-40 animate-slide-left mb-[70px]">
             <SidebarRight />
           </div>
         )}

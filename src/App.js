@@ -12,6 +12,9 @@ import {
   WeekRank,
   ZingChart,
   Follow,
+  Search,
+  SearchSong,
+  SearchAll,
 } from "./pages/public";
 import path from "./untils/path";
 import * as action from "./store/actions";
@@ -43,6 +46,11 @@ function App() {
             <Route path={path.PLAYLIST__TITLE_PID} element={<Album />} />
             <Route path={path.WEEKRANK__TITLE__PID} element={<WeekRank />} />
             <Route path={path.ZING__CHART} element={<ZingChart />} />
+            <Route path={path.SEARCH} element={<Search />}>
+              <Route path={path.ALL} element={<SearchAll />} />
+              <Route path={path.SONG} element={<SearchSong />} />
+            </Route>
+
             <Route path={path.STAR} element={<Home />} />
           </Route>
         </Routes>
