@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import * as api from "../api";
+import * as action from "../store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { createSearchParams, useNavigate } from "react-router-dom";
+import path from "../untils/path";
+
 const Search = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
 
-  
   const handleSearch = async (e) => {
     if (e.keyCode === 13) {
-      const res = await api.apiSearch(input);
-      console.log(res);
+      dispatch(action.search(input));
+      navigate({
+        pathname: `${path.SEARCH}/${path.ALL}`,
+        search: createSearchParams({
+          q: input,
+        }).toString(),
+      });
     }
   };
   return (

@@ -8,6 +8,7 @@ const initialState = {
   songs: null,
   pid: null,
   recentSongs: [],
+  searchData: {},
 };
 const musicReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -41,6 +42,11 @@ const musicReducer = (state = initialState, action) => {
       return {
         ...state,
         pid: action.pid || null,
+      };
+    case actionTypes.SEARCH:
+      return {
+        ...state,
+        searchData: action.data || {},
       };
     case actionTypes.SET_RECENT_SONGS:
       let songs = state.recentSongs;

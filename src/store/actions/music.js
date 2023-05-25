@@ -30,16 +30,24 @@ export const SetRecentSongs = (data) => ({
   data,
 });
 
-// export const fetchDetailPlaylist = (pid) => async (dispatch) => {
-//   try {
-//     const response = await api.apiGetDetailPlaylist(pid);
-//     if (response.data.err === 0) {
-//       dispatch({
-//         type: actionTypes.PLAY_LIST,
-//         songs: response.data?.song?.items,
-//       });
-//     }
-//   } catch (error) {
-//     dispatch({ type: actionTypes.PLAY_LIST, songs: null });
-//   }
-// };
+export const search = (keyword) => async (dispatch) => {
+  try {
+    const response = await api.apiSearch(keyword);
+    if (response.data.err === 0) {
+      dispatch({
+        type: actionTypes.SEARCH,
+        data: response.data.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.SEARCH,
+        data: null,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.SEARCH,
+      data: null,
+    });
+  }
+};
