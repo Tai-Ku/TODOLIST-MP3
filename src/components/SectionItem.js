@@ -8,6 +8,7 @@ const SectionItem = ({
   thumbnailM,
   sortDescription,
   data,
+  searchTop,
   artistsNames,
   title,
 }) => {
@@ -70,8 +71,10 @@ const SectionItem = ({
         )}
       </div>
       <span className="flex flex-col text-sm text-[#ffffff80]">
-        {checkData && <span className="text-[#ffffff]">{title}</span>}
-        {checkData ? (
+        {(checkData || searchTop) && (
+          <span className="text-[#ffffff]">{title}</span>
+        )}
+        {checkData || searchTop ? (
           <span
             onMouseEnter={() => setIsHoverText(true)}
             onMouseLeave={() => setIsHoverText(false)}

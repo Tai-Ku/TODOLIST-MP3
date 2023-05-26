@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 function Home() {
   const { friday, newEveryDay, top100, album, hArtistTheme, weekChart } =
     useSelector((state) => state.app);
+  console.log(top100);
   return (
     <>
       <div className="overflow-y-auto h-full">

@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "../store/actions";
 
-const List = ({ songData, index }) => {
+const List = ({ songData, index, none }) => {
   const dispatch = useDispatch();
   const { isPlaying, curSongId } = useSelector((state) => state.music);
   const active = document.querySelector(".active");
@@ -33,9 +33,11 @@ const List = ({ songData, index }) => {
       }}
     >
       <div className="flex items-center gap-2 flex-1">
-        <span>
-          <i className="fa-solid fa-music text-[#ffffff80]"></i>
-        </span>
+        {none && (
+          <span>
+            <i className="fa-solid fa-music text-[#ffffff80]"></i>
+          </span>
+        )}
         <img
           src={songData.thumbnail}
           alt="thumbnail"
@@ -52,12 +54,14 @@ const List = ({ songData, index }) => {
           </span>
         </span>
       </div>
-      <div className="flex-1 flex ml-[22%] text-xs  text-[#ffffff80]">
-        {songData?.album?.title.length > 25
-          ? `${songData?.album?.title.slice(0, 25)}...`
-          : songData?.album?.title}
-      </div>
-      <div className="flex-1 flex items-center justify-end  text-xs  text-[#ffffff80]">
+      {none && (
+        <div className="flex-1 flex ml-[22%] text-xs  text-[#ffffff80]">
+          {songData?.album?.title.length > 25
+            ? `${songData?.album?.title.slice(0, 25)}...`
+            : songData?.album?.title}
+        </div>
+      )}
+      <div className=" flex items-center justify-end  text-xs  text-[#ffffff80]">
         {moment.utc(songData?.duration * 1000).format("mm:ss")}
       </div>
     </div>

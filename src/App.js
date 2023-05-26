@@ -12,6 +12,7 @@ import {
   WeekRank,
   ZingChart,
   Follow,
+  Singer,
   Search,
   SearchSong,
   SearchAll,
@@ -50,6 +51,8 @@ function App() {
               <Route path={path.ALL} element={<SearchAll />} />
               <Route path={path.SONG} element={<SearchSong />} />
             </Route>
+            <Route path={path.SINGER} element={<Singer />} />
+            <Route path={path.SINGEROA} element={<Singer />} />
 
             <Route path={path.STAR} element={<Home />} />
           </Route>

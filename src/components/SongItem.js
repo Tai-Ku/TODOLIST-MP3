@@ -7,16 +7,20 @@ import { useDispatch, useSelector } from "react-redux";
 import AudioLoading from "./AudioLoading";
 
 const SongItem = ({
+  // props data
   artistsNames,
   title,
   thumbnail,
   releaseDate,
   sid,
   audio,
-  sm,
-  rank,
-  style,
   score,
+  rank,
+  // props style
+  bg,
+  sm,
+  lg,
+  style,
 }) => {
   const dispatch = useDispatch();
   const { isPlaying } = useSelector((state) => state.music);
@@ -40,12 +44,14 @@ const SongItem = ({
       onMouseLeave={() => setIsHover(false)}
       className={`${
         style || ""
-      } w-full flex gap-[10px] justify-between items-center  p-[10px]  cursor-pointer relative`}
+      } w-full flex gap-[10px] justify-between items-center ${
+        bg && bg
+      } p-[10px]  cursor-pointer relative`}
     >
       {isHover && (
         <div
           className={`absolute top-0 bottom-0 left-0 right-0 w-full flex justify-between ${
-            sm ? "px-[6px]" : "px-4"
+            sm ? "px-[6px]" : lg ? "px-6" : "px-4"
           } items-center ${rank ? "bg-[#ffffff33] px-7" : " bg-overplay-30"} `}
         >
           <span className=" w-[51px] text-center cursor-pointer">
@@ -76,7 +82,7 @@ const SongItem = ({
           src={thumbnail}
           alt="thumbnail"
           className={`${
-            sm ? "w-[40px] h-[40px]" : "w-[60px] h-[60px]"
+            sm ? "w-[40px] h-[40px]" : lg ? lg : "w-[60px] h-[60px]"
           } object-cover rounded-md`}
         />
         <div className="flex flex-col gap-1 ">
