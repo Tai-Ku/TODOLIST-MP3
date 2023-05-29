@@ -94,3 +94,17 @@ export const apiSearch = (keyword) =>
       reject(error);
     }
   });
+
+export const apiArtist = (name) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios({
+        url: "/artist",
+        method: "GET",
+        params: { name: name },
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

@@ -34,7 +34,7 @@ const Section = ({ data, searchTop }) => {
               artistsNames={item?.artistsNames}
               title={item?.title}
               data={data}
-              searchTop
+              searchTop={searchTop}
             />
           ))}
         </div>

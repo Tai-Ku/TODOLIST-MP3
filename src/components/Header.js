@@ -2,7 +2,7 @@ import React from "react";
 import Search from "./Search";
 const Header = () => {
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex relative z-10 justify-between w-full">
       <div className="flex items-center gap-6 w-full">
         <div className="flex gap-6 ">
           <span>

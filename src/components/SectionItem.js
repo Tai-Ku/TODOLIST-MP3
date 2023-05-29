@@ -24,6 +24,7 @@ const SectionItem = ({
     let url = link?.split(".")[0];
     let parts = url.split("/");
     let pid = parts[parts.length - 1];
+
     dispatch(action.SetPidPlayList(pid));
   };
   const handleClick = (e) => {

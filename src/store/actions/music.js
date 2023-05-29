@@ -51,3 +51,18 @@ export const search = (keyword) => async (dispatch) => {
     });
   }
 };
+export const artistData = (name) => async (dispatch) => {
+  try {
+    const response = await api.apiArtist(name);
+    if (response.data.err === 0) {
+      dispatch({
+        type: actionTypes.ARTIST,
+        data: response.data.data,
+      });
+    } else {
+      dispatch({ type: actionTypes.ARTIST, data: null });
+    }
+  } catch (error) {
+    dispatch({ type: actionTypes.ARTIST, data: null });
+  }
+};

@@ -1,10 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 
-import { SidebarLeft, SidebarRight, Player, Header } from "../../components";
+import {
+  SidebarLeft,
+  SidebarRight,
+  Player,
+  Header,
+  ArtistsBg,
+} from "../../components";
 import { useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 function Public() {
   const [isShowSideBar, setIsShowSideBar] = useState(false);
+  const { name } = useParams();
+
   return (
     <div className="w-full relative h-screen flex flex-col bg-[#1a0b23] ">
       <div className="w-full h-full flex flex-auto">
@@ -12,8 +20,21 @@ function Public() {
           <SidebarLeft />
         </div>
         <div className="flex-auto flex flex-col ">
-          <div className="h-[70px] flex flex-none items-center px-[59px]">
-            <Header />
+          <div
+            className={`h-[70px] flex flex-none items-center ${
+              !name && "px-[59px]"
+            }`}
+          >
+            {name ? (
+              <div className=" relative w-full h-full ">
+                <Header />
+                <div className="absolute  w-full h-[410px] top-0 left-0 right-0 ">
+                  <ArtistsBg />
+                </div>
+              </div>
+            ) : (
+              <Header />
+            )}
           </div>
           <div className="flex-auto w-full ">
             <Scrollbars autoHide style={{ width: "100%", height: "100%" }}>
