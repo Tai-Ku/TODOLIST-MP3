@@ -22,23 +22,15 @@ export const sidebarMenu = [
 ];
 export const searchMenu = [
   {
-    path: "mymusic",
-    text: "Cá nhân",
-    icons: <i className="fa-solid fa-music"></i>,
+    path: "tat-ca",
+    text: "TẤT CẢ",
   },
   {
-    path: "",
-    text: "Khám Phá",
-    icons: <i className="fa-solid fa-compact-disc"></i>,
+    path: "bai-hat",
+    text: "BÀI HÁT",
   },
   {
-    path: "zing-chart",
-    text: "#zingchart",
-    icons: <i className="fa-solid fa-chart-pie"></i>,
-  },
-  {
-    path: "follow",
-    text: "Theo dõi",
-    icons: <i className="fa-regular fa-newspaper"></i>,
+    path: "playlist",
+    text: "PLAYLIST",
   },
 ];

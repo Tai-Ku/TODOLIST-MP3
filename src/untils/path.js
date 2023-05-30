@@ -10,6 +10,7 @@ const path = {
   PLAYLIST__TITLE_PID: "playlist/:title/:pid",
   ZING__CHART: "zing-chart",
   SEARCH: "tim-kiem",
+  PLAYLIST: "playlist",
   ALL: "tat-ca",
   SONG: "bai-hat",
   SINGER: "nghe-si/:name",

@@ -10,6 +10,7 @@ const initialState = {
   recentSongs: [],
   searchData: {},
   artistData: {},
+  keyword: "",
 };
 const musicReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -48,10 +49,9 @@ const musicReducer = (state = initialState, action) => {
       return {
         ...state,
         searchData: action.data || {},
+        keyword: action.keyword,
       };
     case actionTypes.ARTIST:
-      console.log(action.artistData);
-
       return {
         ...state,
         artistData: action.data || null,

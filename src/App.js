@@ -15,6 +15,7 @@ import {
   Singer,
   Search,
   SearchSong,
+  SearchPlaylist,
   SearchAll,
 } from "./pages/public";
 import path from "./untils/path";
@@ -50,6 +51,7 @@ function App() {
             <Route path={path.SEARCH} element={<Search />}>
               <Route path={path.ALL} element={<SearchAll />} />
               <Route path={path.SONG} element={<SearchSong />} />
+              <Route path={path.PLAYLIST} element={<SearchPlaylist />} />
             </Route>
             <Route path={path.SINGER} element={<Singer />} />
             <Route path={path.SINGEROA} element={<Singer />} />

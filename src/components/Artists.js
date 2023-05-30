@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as fn from "../untils/fn";
 import * as api from "../api";
@@ -36,8 +36,10 @@ const Artists = ({ item, link, thumbnail, name, totalFollow }) => {
           src={thumbnail}
         />
       </div>
-      <div className="flex gap-1 items-center flex-col">
-        <span className="text-sm text-[#ffff]">{name}</span>
+      <div className="flex gap-1 items-center hover:underline  flex-col">
+        <Link to={link} className="text-sm text-[#ffff]">
+          {name}
+        </Link>
         <span className="text-xs text-[#ffffff80]">
           {`${fn.handleNumbers(totalFollow)} quan tâm`}
         </span>
