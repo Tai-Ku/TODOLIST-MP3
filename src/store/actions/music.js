@@ -69,3 +69,24 @@ export const artistData = (name) => async (dispatch) => {
     dispatch({ type: actionTypes.ARTIST, data: null });
   }
 };
+// export const artistSong = (id, page, count) => async (dispatch) => {
+//   try {
+//     const response = await api.apiArtistSong(id, page, count);
+//     if (response.err === 0) {
+//       dispatch({
+//         type: actionTypes.ARTIST_SONG,
+//         data: response.data,
+//       });
+//     } else {
+//       dispatch({
+//         type: actionTypes.ARTIST_SONG,
+//         data: null,
+//       });
+//     }
+//   } catch (error) {
+//     dispatch({
+//       type: actionTypes.ARTIST_SONG,
+//       data: null,
+//     });
+// //   }
+// };

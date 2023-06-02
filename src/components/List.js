@@ -8,6 +8,7 @@ const List = ({ songData, index, none }) => {
   const dispatch = useDispatch();
   const { isPlaying, curSongId } = useSelector((state) => state.music);
   const active = document.querySelector(".active");
+  console.log();
   useEffect(() => {
     if (active) {
       active.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -43,7 +44,7 @@ const List = ({ songData, index, none }) => {
           alt="thumbnail"
           className="object-cover h-[40px] rounded-md"
         />
-        <span className="flex flex-col w-full">
+        <span className="flex flex-col ">
           <span className="text-sm font-semibold text-[#fff] ">
             {songData?.title?.length > 30
               ? `${songData?.title?.slice(0, 25)}...`
@@ -53,7 +54,12 @@ const List = ({ songData, index, none }) => {
             {songData?.artistsNames}
           </span>
         </span>
+
+        {/* bug item-cemter */}
       </div>
+      <span className="flex-1  text-xs font-semibold text-[#ffffff80]">
+        {songData?.album?.title}
+      </span>
       {none && (
         <div className="flex-1 flex ml-[22%] text-xs  text-[#ffffff80]">
           {songData?.album?.title.length > 25

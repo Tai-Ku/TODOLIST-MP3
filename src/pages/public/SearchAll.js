@@ -2,10 +2,21 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SongItem, List, Section, Artists } from "../../components/index";
 import * as fn from "../../untils/fn";
+import { useNavigate } from "react-router-dom";
+import * as actions from "../../store/actions";
 const SearchAll = () => {
-  const { searchData } = useSelector((state) => state.music);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { searchData, isPlaying } = useSelector((state) => state.music);
   const searchDataTop = searchData?.top;
-
+  const handelClick = () => {
+    if (searchDataTop.objectType === "artist") {
+      navigate(searchDataTop?.link);
+    } else {
+      dispatch(actions.setCurSongId(searchDataTop.encodeId));
+      dispatch(actions.play(!isPlaying));
+    }
+  };
   return (
     <div className="w-full flex px-[59px] flex-col gap-[60px]">
       {/* Nổi Bật */}
@@ -13,7 +24,10 @@ const SearchAll = () => {
         <h3 className="text-lg text-[#ffff] mb-5 font-bold">Nổi Bật</h3>
         <div className="flex gap-8 ">
           {searchDataTop && (
-            <div className="flex flex-1 cursor-pointer rounded-lg items-center gap-4 p-[10px] bg-[#231a2e]">
+            <div
+              onClick={handelClick}
+              className="flex flex-1 cursor-pointer rounded-lg items-center gap-4 p-[10px] bg-[#231a2e]"
+            >
               <img
                 className={`w-[84px] h-[84px] object-cover ${
                   searchDataTop?.objectType === "artist" ? "rounded-full" : ""

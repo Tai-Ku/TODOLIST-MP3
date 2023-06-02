@@ -8,17 +8,7 @@ const active = "border-b px-4 h-[54px] border-[#9b4de0] flex items-center ";
 const notActive =
   "text-[#c2c1c4] px-4 h-[54px] flex items-center opacity-[0.9] border-gray-400 cursor-pointer hover:text-white hover:opacity-[1]";
 const Search = () => {
-  const [searchParams] = useSearchParams();
   const { keyword } = useSelector((state) => state.music);
-  console.log(keyword);
-  useEffect(() => {
-    const params = [];
-    for (const entry of searchParams.entries()) {
-      params.push(entry);
-    }
-  }, [searchParams]);
-  console.log(searchParams);
-
   return (
     <Scrollbars style={{ width: "100%", height: "100%" }}>
       <div className="mb-[100px]">
@@ -30,7 +20,7 @@ const Search = () => {
             {menu.searchMenu.map((item, index) => (
               <NavLink
                 key={item.path}
-                to={`${item.path}?q=${keyword.replace(" ", "+")}`}
+                to={`${item.path}?q=${keyword?.replace(" ", "+")}`}
                 className={({ isActive }) => (isActive ? active : notActive)}
               >
                 <span className="">{item.text}</span>

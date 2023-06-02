@@ -25,10 +25,12 @@ const Lists = ({ totalDuration }) => {
           />
         ))}
       </div>
-      <span className="flex text-xs text-[#ffffff80] gap-3">
-        <span>{`${songs?.length} bài hát`}</span>
-        <span>{moment.utc(totalDuration * 100).format("HH:mm:ss")}</span>
-      </span>
+      {totalDuration && (
+        <span className="flex text-xs text-[#ffffff80] gap-3">
+          <span>{`${songs?.length} bài hát`}</span>
+          <span>{moment.utc(totalDuration * 100).format("HH:mm:ss")}</span>
+        </span>
+      )}
     </div>
   );
 };

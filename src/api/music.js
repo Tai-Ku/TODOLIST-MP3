@@ -108,3 +108,17 @@ export const apiArtist = (name) =>
       reject(error);
     }
   });
+
+export const apiArtistSong = (id, page, count) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios({
+        url: "/artistSong",
+        method: "GET",
+        params: { id: id, page: page, count: count },
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
