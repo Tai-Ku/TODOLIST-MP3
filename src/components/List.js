@@ -4,11 +4,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "../store/actions";
 
-const List = ({ songData, index, none }) => {
+const List = ({ songData, none }) => {
   const dispatch = useDispatch();
   const { isPlaying, curSongId } = useSelector((state) => state.music);
   const active = document.querySelector(".active");
-  console.log();
   useEffect(() => {
     if (active) {
       active.scrollIntoView({ behavior: "smooth", block: "nearest" });

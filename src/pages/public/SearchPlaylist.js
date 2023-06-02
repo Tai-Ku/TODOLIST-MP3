@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Section } from "../../components";
-
+import { SectionItem } from "../../components";
+import * as api from "../../api";
 const SearchPlaylist = () => {
   const { searchData } = useSelector((state) => state.music);
-  const data = searchData?.playlists;
-  console.log(data);
+  const [playlist, setPlaylist] = useState();
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await api.apiArtist(searchData?.top?.alias);
+      if (res.data.err === 0) {
+        setPlaylist(res.data.data.sections[0].items);
+      }
+    };
+    fetch();
+  }, []);
   return (
-    <div className="px-[59px] flex flex-col">
-      <h3 className="text-xl text-white mb-5">PlayList</h3>
-      <Section data={data} />
+    <div className=" flex flex-col">
+      <h3 className="text-xl text-white px-[59px] mb-5">PlayList</h3>
+      <div className="flex flex-wrap px-[43px]  ">
+        {playlist?.map((item) => (
+          <SectionItem
+            key={item.encodeId}
+            link={item?.link}
+            thumbnailM={item?.thumbnailM}
+            sortDescription={item?.sortDescription}
+            artistsNames={item?.artistsNames}
+            title={item?.title}
+            data={playlist}
+            px="px-4 py-2"
+          />
+        ))}
+      </div>
     </div>
   );
 };

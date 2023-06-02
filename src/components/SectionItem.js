@@ -11,6 +11,7 @@ const SectionItem = ({
   searchTop,
   artistsNames,
   title,
+  px,
 }) => {
   const { pid } = useParams();
   const checkData = data?.sectionId === "h100" || data?.sectionId === "hAlbum";
@@ -23,8 +24,8 @@ const SectionItem = ({
     negative(link?.split(".")[0]);
     let url = link?.split(".")[0];
     let parts = url.split("/");
-    let pid = parts[parts.length - 1];
-
+    let pid = parts[parts?.length - 1];
+    console.log(pid);
     dispatch(action.SetPidPlayList(pid));
   };
   const handleClick = (e) => {
@@ -39,7 +40,7 @@ const SectionItem = ({
   return (
     <div
       onClick={handleClickP}
-      className="w-1/5 flex flex-col gap-3 cursor-pointer "
+      className={`${px ? px : ""} w-1/5 flex flex-col gap-3 cursor-pointer `}
     >
       <div
         onMouseEnter={() => setIsHover(true)}
@@ -72,7 +73,7 @@ const SectionItem = ({
         )}
       </div>
       <span className="flex flex-col text-sm text-[#ffffff80]">
-        {(checkData || searchTop) && (
+        {(checkData || searchTop || data) && (
           <span className="text-[#ffffff]">{title}</span>
         )}
         {checkData || searchTop ? (
@@ -83,7 +84,7 @@ const SectionItem = ({
           >
             {artistsNames}
           </span>
-        ) : sortDescription.length > 50 ? (
+        ) : sortDescription?.length > 50 ? (
           `${sortDescription.slice(0, 50)}...`
         ) : (
           sortDescription
