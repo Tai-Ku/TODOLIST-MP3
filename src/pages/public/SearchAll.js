@@ -9,6 +9,7 @@ const SearchAll = () => {
   return (
     <div className="w-full flex px-[59px] flex-col gap-[60px]">
       {/* Nổi Bật */}
+      {/* test */}
       <div className="flex flex-col">
         <h3 className="text-lg text-[#ffff] mb-5 font-bold">Nổi Bật</h3>
         <div className="flex gap-8 ">
