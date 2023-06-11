@@ -11,6 +11,7 @@ const initialState = {
   hArtistTheme: {},
   chart: {},
   rank: [],
+  alumHot: null,
 };
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -45,6 +46,9 @@ const appReducer = (state = initialState, action) => {
         rank:
           action.homeData?.find((item) => item.sectionId === "hZC")?.items ||
           [],
+        alumHot:
+          action.homeData?.find((item) => item.sectionId === "hNewrelease")
+            ?.items || [],
       };
     default:
       return state;

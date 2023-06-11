@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import { NavLink, Outlet, useSearchParams } from "react-router-dom";
+import { NavLink, Outlet, useParams, useSearchParams } from "react-router-dom";
 import * as menu from "../../untils/menu";
 import { useSelector } from "react-redux";
 

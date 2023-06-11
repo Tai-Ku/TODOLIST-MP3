@@ -16,4 +16,5 @@ export { default as SongItem } from "./SongItem";
 export { default as SectionItem } from "./SectionItem";
 export { default as ChartSection } from "./ChartSection";
 export { default as Artists } from "./Artists";
+export { default as SongHot } from "./SongHot";
 export { default as ArtistsBg } from "./ArtistsBg";

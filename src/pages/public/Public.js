@@ -21,20 +21,11 @@ function Public() {
         </div>
         <div className="flex-auto flex flex-col ">
           <div
-            className={`h-[70px] flex flex-none items-center ${
-              !name && "px-[59px]"
+            className={`h-[70px]  px-[59px] flex flex-none items-center ${
+              name && "fixed  top-0 right-[329px] left-[240px] z-50"
             }`}
           >
-            {name ? (
-              <div className=" relative w-full h-full ">
-                <Header />
-                <div className="absolute  w-full h-[410px] top-0 left-0 right-0 ">
-                  <ArtistsBg />
-                </div>
-              </div>
-            ) : (
-              <Header />
-            )}
+            <Header />
           </div>
           <div className="flex-auto w-full ">
             <Scrollbars autoHide style={{ width: "100%", height: "100%" }}>

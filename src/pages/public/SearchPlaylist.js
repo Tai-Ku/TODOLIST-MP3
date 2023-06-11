@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { SectionItem } from "../../components";
 import * as api from "../../api";
+import { useParams } from "react-router-dom";
 const SearchPlaylist = () => {
   const { searchData } = useSelector((state) => state.music);
   const [playlist, setPlaylist] = useState();
   useEffect(() => {
     const fetch = async () => {
       const res = await api.apiArtist(searchData?.top?.alias);
+      console.log(res);
       if (res.data.err === 0) {
         setPlaylist(res.data.data.sections[0].items);
       }
