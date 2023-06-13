@@ -47,9 +47,11 @@ const appReducer = (state = initialState, action) => {
           action.homeData?.find((item) => item.sectionId === "hZC")?.items ||
           [],
         alumHot:
+          
           action.homeData?.find((item) => item.sectionId === "hNewrelease")
             ?.items || [],
       };
+      
     default:
       return state;
   }

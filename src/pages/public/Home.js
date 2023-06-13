@@ -19,7 +19,6 @@ function Home() {
     weekChart,
     alumHot,
   } = useSelector((state) => state.app);
-  console.log(alumHot);
   const SampleNextArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -87,6 +86,7 @@ function Home() {
             <Slider {...settings} className="w-full gap-6 ">
               {alumHot?.map((item, i) => (
                 <SongHot
+                  key={item.encodeId || i}
                   title={item.title}
                   rank={i + 1}
                   thumbnailM={item.thumbnailM}
