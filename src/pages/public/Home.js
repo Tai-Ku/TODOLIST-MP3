@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import Slider from "react-slick";
+import SlickSlider from "react-slick";
+
 import {
   Section,
-  // Slider,
+  Slider,
   NewRelease,
   ChartSection,
   SongHot,
@@ -71,7 +72,7 @@ function Home() {
   return (
     <>
       <div className="overflow-y-auto h-full">
-        {/* <Slider /> */}
+        <Slider />
         <Section data={friday} />
         <Section data={newEveryDay} />
         <NewRelease />
@@ -84,7 +85,7 @@ function Home() {
             <h2 className="text-[12px] text-[#ffffff80]">TẤT CẢ</h2>
           </div>
           <div className="flex items-center w-[full] p-[5px] gap-6  ">
-            <Slider {...settings} className="w-full gap-6 ">
+            <SlickSlider {...settings} className="w-full gap-6 ">
               {alumHot?.map((item, i) => (
                 <SongHot
                   key={item.encodeId || i}
@@ -95,7 +96,7 @@ function Home() {
                   releaseDate={item.releaseDate}
                 />
               ))}
-            </Slider>
+            </SlickSlider>
           </div>
         </div>
         <Section data={hArtistTheme} />
