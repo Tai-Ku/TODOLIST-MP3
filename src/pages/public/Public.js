@@ -9,8 +9,10 @@ import {
 } from "../../components";
 import { useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
+import { useSelector } from "react-redux";
 function Public() {
   const [isShowSideBar, setIsShowSideBar] = useState(false);
+  const { curSongId } = useSelector((state) => state.music);
   const { name } = useParams();
 
   return (
@@ -39,9 +41,11 @@ function Public() {
           </div>
         )}
       </div>
-      <div className="h-[90px] z-50 fixed bottom-0 left-0 right-0 flex-none w-full bg-[#15091c]">
-        <Player setIsShowSideBar={setIsShowSideBar} />
-      </div>
+      {curSongId && (
+        <div className="h-[90px] z-50 fixed bottom-0 left-0 right-0 flex-none w-full bg-[#15091c]">
+          <Player setIsShowSideBar={setIsShowSideBar} />
+        </div>
+      )}
     </div>
   );
 }
