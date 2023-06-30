@@ -19,6 +19,7 @@ function Home() {
     weekChart,
     alumHot,
   } = useSelector((state) => state.app);
+
   const SampleNextArrow = (props) => {
     const { className, style, onClick } = props;
     return (
