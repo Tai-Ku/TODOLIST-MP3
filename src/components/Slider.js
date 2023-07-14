@@ -5,6 +5,7 @@ import * as actions from "../store/actions";
 import { useNavigate } from "react-router-dom";
 const Slider = () => {
   const { banner } = useSelector((state) => state.app);
+  console.log(banner);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -78,7 +79,7 @@ const Slider = () => {
         {banner?.map((item, index) => (
           <img
             key={item.encodeId}
-            src={item.banner}
+            src={item?.banner}
             onClick={() => handleClickBanner(item)}
             className={`cursor-pointer slider-item flex-1 object-contain w-[30%] rounded-lg ${
               index <= 2 ? "block" : "hidden"

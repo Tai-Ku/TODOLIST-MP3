@@ -37,3 +37,11 @@
   background: linear-gradient(0deg, rgb(14, 19, 26), rgba(14, 19, 26, 0));
   opacity: 0.95;
 }
+.text-chart {
+    background: radial-gradient(
+        50% 124.93% at 95.86% -10%,
+        #3efad9 0,
+        hsla(0, 0%, 100%, 0) 100%
+      ),
+      linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%);
+}

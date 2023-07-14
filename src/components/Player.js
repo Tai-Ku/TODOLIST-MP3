@@ -12,6 +12,7 @@ const Player = ({ setIsShowSideBar }) => {
   const { curSongId, isPlaying, playListWatched, songs } = useSelector(
     (state) => state.music
   );
+  
   const [isLoaded, setIsLoaded] = useState(true);
   const [songInfo, setSongInfo] = useState(null);
   const [audio, setAudio] = useState(new Audio());

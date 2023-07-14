@@ -67,6 +67,20 @@ export const apiChartWeek = (pid) =>
       reject(error);
     }
   });
+
+export const apiChartHome = () =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios({
+        url: "/charthome",
+        method: "GET",
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
 // export const apiSearch = (keyword) =>
 //   new Promise(async (resolve, reject) => {
 //     try {
